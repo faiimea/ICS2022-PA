@@ -76,7 +76,6 @@ static struct {
 
 static int cmd_help(char *args) {
   /* extract the first argument */
-  printf("%s\n", args);
   char *arg = strtok(NULL, " ");
   int i;
 
@@ -100,9 +99,9 @@ static int cmd_help(char *args) {
 
 
 static int cmd_si(char *args) {
-  char *arg = strtok(NULL, " ");
+  //char *arg = strtok(NULL, " ");
   int step;
-  if (arg == NULL) {
+  if (args == NULL) {
     step = 1;
   }
   else {
