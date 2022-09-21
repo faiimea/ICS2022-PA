@@ -99,8 +99,7 @@ static int cmd_help(char *args) {
 
 
 static int cmd_si(char *args) {
-  char *arg = strtok(args, " ");
-  printf("%s", arg);
+  char *arg = strtok(NULL, " ");
   int step;
   if (arg == NULL) {
     step = 1;
@@ -108,8 +107,8 @@ static int cmd_si(char *args) {
   else {
     sscanf(arg, "%d", &step);
   }
-
-  printf("%d\n", step);
+  cpu_exec(step);
+  //printf("%d\n", step);
   return 0;
 }
 
