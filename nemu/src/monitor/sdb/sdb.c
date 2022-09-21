@@ -65,6 +65,7 @@ static struct {
   { "q", "Exit NEMU", cmd_q },
 
   /* TODO: Add more commands */
+  //{ "si", "Ex", cmd_si},
 
 };
 
@@ -92,6 +93,15 @@ static int cmd_help(char *args) {
   }
   return 0;
 }
+/*
+static int cmd_si(cahr *args) {
+  char *arg = strtok(NULL, " ");
+  int i;
+
+  if (arg == NULL) {
+
+  }
+}*/
 
 void sdb_set_batch_mode() {
   is_batch_mode = true;
