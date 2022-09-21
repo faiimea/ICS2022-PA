@@ -54,6 +54,7 @@ static int cmd_q(char *args) {
 }
 
 static int cmd_help(char *args);
+static int cmd_si(char *args);
 
 static struct {
   const char *name;
@@ -65,7 +66,7 @@ static struct {
   { "q", "Exit NEMU", cmd_q },
 
   /* TODO: Add more commands */
-  //{ "si", "Ex", cmd_si},
+  { "si", "test", cmd_si},
 
 };
 
@@ -93,15 +94,17 @@ static int cmd_help(char *args) {
   }
   return 0;
 }
-/*
-static int cmd_si(cahr *args) {
+
+static int cmd_si(char *args) {
   char *arg = strtok(NULL, " ");
-  int i;
-
   if (arg == NULL) {
-
+    printf("si\n");
   }
-}*/
+  else {
+    printf("Unknown command '%s'\n", arg);
+  }
+  return 0;
+}
 
 void sdb_set_batch_mode() {
   is_batch_mode = true;
