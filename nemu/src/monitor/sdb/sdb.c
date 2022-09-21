@@ -100,12 +100,13 @@ static int cmd_help(char *args) {
 
 static int cmd_si(char *args) {
   char *arg = strtok(NULL, " ");
+  printf("%s", args);
   int step;
   if (arg == NULL) {
     step = 1;
   }
   else {
-    sscanf(arg, "%d", &step);
+    sscanf(args, "%d", &step);
   }
   cpu_exec(step);
   //printf("%d\n", step);
