@@ -49,7 +49,8 @@ static int cmd_c(char *args) {
 
 
 static int cmd_q(char *args) {
-  return 0;
+  cpu_exec(-1);
+  return -1;
 }
 
 static int cmd_help(char *args);
