@@ -99,16 +99,15 @@ static int cmd_help(char *args) {
 
 
 static int cmd_si(char *args) {
-  //char *arg = strtok(NULL, " ");
+  char *arg = strtok(NULL, " ");
   int step;
-  if (args == NULL) {
+  if (arg == NULL) {
     step = 1;
   }
   else {
-    sscanf(args, "%d", &step);
+    sscanf(arg, "%d", &step);
   }
   cpu_exec(step);
-  //printf("%d\n", step);
   return 0;
 }
 
