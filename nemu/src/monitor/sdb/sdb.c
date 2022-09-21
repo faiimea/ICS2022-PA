@@ -57,7 +57,7 @@ static int cmd_help(char *args);
 
 static int cmd_si(char *args);
 
-static int cmd_info(char *args);
+//static int cmd_info(char *args);
 
 static struct {
   const char *name;
@@ -70,7 +70,7 @@ static struct {
 
   /* TODO: Add more commands */
   { "si", "Execute N instructions", cmd_si},
-  { "info", "Print the state of rigister and information of monitor", cmd_info}
+//  { "info", "Print the state of rigister and information of monitor", cmd_info}
 
 };
 
@@ -112,13 +112,15 @@ static int cmd_si(char *args) {
   cpu_exec(step);
   return 0;
 }
-
+/*
 static int cmd_info(char *args) {
   char *arg = strtok(NULL, " ");
-  printf("%s", arg);
+  if (arg == 'r'){
+    
+  }
   return 0;
 }
-
+*/
 void sdb_set_batch_mode() {
   is_batch_mode = true;
 }
