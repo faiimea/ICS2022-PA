@@ -100,6 +100,7 @@ static int cmd_help(char *args) {
 
 static int cmd_si(char *args) {
   char *arg = strtok(args, " ");
+  printf("%s", arg);
   int step;
   if (arg == NULL) {
     step = 1;
