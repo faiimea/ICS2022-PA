@@ -67,7 +67,8 @@ static struct {
   { "q", "Exit NEMU", cmd_q },
 
   /* TODO: Add more commands */
-  { "si", "test", cmd_si},
+  { "si", "Execute N instructions", cmd_si},
+  //{ "info", "Print the state of rigister and information of monitor", cmd_info}
 
 };
 
@@ -96,18 +97,18 @@ static int cmd_help(char *args) {
   return 0;
 }
 
+
 static int cmd_si(char *args) {
   char *arg = strtok(NULL, " ");
-  //int i;
-  int limit = 0;
+  int step;
   if (arg == NULL) {
-    limit = 1;
+    step = 1;
   }
   else {
-    printf("%s\n", arg);
+    sscanf(arg, "%d", &step);
   }
 
-  printf("%d\n", limit);
+  printf("%d\n", step);
   return 0;
 }
 
