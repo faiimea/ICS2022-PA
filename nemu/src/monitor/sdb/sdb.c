@@ -54,6 +54,7 @@ static int cmd_q(char *args) {
 }
 
 static int cmd_help(char *args);
+
 static int cmd_si(char *args);
 
 static struct {
@@ -97,12 +98,16 @@ static int cmd_help(char *args) {
 
 static int cmd_si(char *args) {
   char *arg = strtok(NULL, " ");
+  //int i;
+  int limit = 0;
   if (arg == NULL) {
-    printf("si\n");
+    limit = 1;
   }
   else {
-    printf("Unknown command '%s'\n", arg);
+    printf("%s\n", arg);
   }
+
+  printf("%d\n", limit);
   return 0;
 }
 
