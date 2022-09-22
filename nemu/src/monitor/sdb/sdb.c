@@ -114,7 +114,8 @@ static int cmd_si(char *args) {
 }
 
 static int cmd_info(char *args) {
-  //char *arg = strtok(NULL, " ");
+  char *arg = strtok(NULL, " ");
+	printf("%s\n", arg);
 	isa_reg_display();
   return 0;
 }
@@ -143,6 +144,7 @@ void sdb_mainloop() {
     if (args >= str_end) {
       args = NULL;
     }
+	
 
 #ifdef CONFIG_DEVICE
     extern void sdl_clear_event_queue();
