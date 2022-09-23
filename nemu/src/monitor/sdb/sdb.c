@@ -124,9 +124,12 @@ static int cmd_info(char *args) {
 }
 
 static int cmd_x(char *args) {
-	printf("%s\n", args);
 	char *arg = strtok(NULL, " ");
-	printf("%s\n", arg);
+	int N, expr;
+	if (arg != NULL) {
+		sscanf(arg, "%d, %x", &N, &expr);
+	}
+	printf("%d, %#x\n", N, expr);
 	return 0;
 }
 
