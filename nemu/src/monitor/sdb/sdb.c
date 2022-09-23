@@ -125,18 +125,7 @@ static int cmd_info(char *args) {
 
 static int cmd_x(char *args) {
 	printf("%s\n", args);
-	char *arg = strtok(NULL, " ");
-	int N;
-	word_t expr;
-	if (arg != NULL){
-		sscanf(arg, "%d", &N);
-	}
-	char *arg2 = strtok(NULL, " ");
-	printf("%s\n", arg2);
-	if (arg2 != NULL){
-		sscanf(arg2, "%u", &expr);
-	}
-	printf("%x\n", expr);
+	
 	return 0;
 }
 
@@ -171,7 +160,7 @@ void sdb_mainloop() {
     sdl_clear_event_queue();
 #endif
 
-    int i;
+  	int i;
     for (i = 0; i < NR_CMD; i ++) {
       if (strcmp(cmd, cmd_table[i].name) == 0) {
         if (cmd_table[i].handler(args) < 0) { return; }
