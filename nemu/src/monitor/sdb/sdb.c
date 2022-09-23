@@ -127,16 +127,14 @@ static int cmd_info(char *args) {
 
 static int cmd_x(char *args) {
 	char *arg = strtok(NULL, " ");
-	printf("%s\n", args);
 	int N;
 	int i;
 	word_t expr;
 	sscanf(arg, "%d", &N);
 	arg = strtok(NULL, " ");
 	sscanf(arg, "%x", &expr);
-	printf("%x\n", expr);
 	for (i = 0; i < N; i++){
-		guest_to_host(expr+i);
+		printf("%hhn\n", guest_to_host(expr+i));
 	}
 	return 0;
 }
