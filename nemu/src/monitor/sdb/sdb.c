@@ -128,7 +128,7 @@ static int cmd_x(char *args) {
 	int N;
 	word_t expr;
 	sscanf(args, "%d, %x", &N, &expr);
-	printf("%x\n", expr);
+	printf("%#x\n", expr);
 	return 0;
 }
 
