@@ -129,7 +129,7 @@ static int cmd_x(char *args) {
 	if (arg != NULL) {
 		sscanf(arg, "%d, %x", &N, &expr);
 	}
-	printf("%d, %#x\n", N, expr);
+	printf("%d, %x\n", N, expr);
 	return 0;
 }
 
