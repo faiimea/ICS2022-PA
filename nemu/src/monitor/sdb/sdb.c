@@ -126,7 +126,8 @@ static int cmd_info(char *args) {
 static int cmd_x(char *args) {
 	printf("%s\n", args);
 	char *arg = strtok(NULL, " ");
-	int N, expr;
+	int N;
+	word_t expr;
 	if (arg != NULL) {
 		sscanf(args, "%d, %x", &N, &expr);
 	}
