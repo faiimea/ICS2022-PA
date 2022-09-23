@@ -128,13 +128,18 @@ static int cmd_info(char *args) {
 static int cmd_x(char *args) {
 	char *arg = strtok(NULL, " ");
 	int N;
-	int i;
+	int i, j;
 	word_t expr;
 	sscanf(arg, "%d", &N);
 	arg = strtok(NULL, " ");
 	sscanf(arg, "%x", &expr);
-	for (i = 0; i < N; i++){
-		printf("%x, %#x", expr+i, paddr_read(expr+4, 4));
+	for (i = 0; i < (N-1)/4 + 1; i++) {
+		printf("%x ", expr+i);
+		int start = expr+i*16;
+		for (j = 0; j < 4; j++) {
+			printf("%#x", paddr_read(start+j, 4));
+		}
+		printf("\n");
 	}
 	return 0;
 }
