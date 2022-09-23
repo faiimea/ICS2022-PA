@@ -59,6 +59,8 @@ static int cmd_si(char *args);
 
 static int cmd_info(char *args);
 
+static int cmd_x(char *args);
+
 static struct {
   const char *name;
   const char *description;
@@ -70,8 +72,8 @@ static struct {
 
   /* TODO: Add more commands */
   { "si", "Execute N instructions", cmd_si},
-  { "info", "Print the state of rigister and information of monitor", cmd_info}
-
+  { "info", "Print the state of rigister and information of monitor", cmd_info},
+	{ "x", "Caculate the value of the expression as the start memory address.", cmd_x},
 };
 
 #define NR_CMD ARRLEN(cmd_table)
@@ -119,6 +121,12 @@ static int cmd_info(char *args) {
 		isa_reg_display();
 	}
   return 0;
+}
+
+static int cmd_x(char *args) {
+	char *arg = strtok(NULL, " ");
+	printf("%s\n", arg);
+	return 0;
 }
 
 void sdb_set_batch_mode() {
