@@ -134,7 +134,7 @@ static int cmd_x(char *args) {
 	arg = strtok(NULL, " ");
 	sscanf(arg, "%x", &expr);
 	for (i = 0; i < N; i++){
-		printf("%hhn\n", guest_to_host(expr+i));
+		printf("%x\n", paddr_read(expr, 4));
 	}
 	return 0;
 }
