@@ -127,8 +127,8 @@ static int cmd_x(char *args) {
 	printf("%s\n", args);
 	int N;
 	paddr_t expr;
-	sscanf(args, "%d, %x", &N, &expr);
-	printf("%x\n", expr);
+	sscanf(args, "%d, %u", &N, &expr);
+	printf("%u\n", expr);
 	return 0;
 }
 
