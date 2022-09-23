@@ -14,7 +14,9 @@
 ***************************************************************************************/
 
 #include <isa.h>
+#include <memory/paddr.h>
 #include <cpu/cpu.h>
+#include <cpu/decode.h>
 #include <readline/readline.h>
 #include <readline/history.h>
 #include "sdb.h"
@@ -126,9 +128,12 @@ static int cmd_info(char *args) {
 static int cmd_x(char *args) {
 	printf("%s\n", args);
 	int N;
+	int i;
 	paddr_t expr;
-	sscanf(args, "%d, %x", &N, &expr);
-	printf("%d %#x\n", N, expr);
+	sscanf(args, "%d, %u", &N, &expr);
+	for (i  = 0; i < N; i++){
+		guest_to_host(expr+i);
+	}
 	return 0;
 }
 
