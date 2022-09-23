@@ -137,7 +137,7 @@ static int cmd_x(char *args) {
 		printf("%x ", expr+i);
 		int start = expr+i*16;
 		for (j = 0; j < 4; j++) {
-			printf("%#x", paddr_read(start+j, 4));
+			printf("%#x ", paddr_read(start+j, 4));
 		}
 		printf("\n");
 	}
