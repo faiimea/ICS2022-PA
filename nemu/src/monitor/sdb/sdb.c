@@ -124,6 +124,7 @@ static int cmd_info(char *args) {
 }
 
 static int cmd_x(char *args) {
+	printf("%s\n", args);
 	char *arg = strtok(NULL, " ");
 	int N, expr;
 	if (arg != NULL) {
