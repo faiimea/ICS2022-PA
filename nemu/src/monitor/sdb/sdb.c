@@ -134,7 +134,7 @@ static int cmd_x(char *args) {
 	arg = strtok(NULL, " ");
 	sscanf(arg, "%x", &expr);
 	for (i = 0; i < N; i++){
-		printf("%d, %#x", expr+i, paddr_read(expr+i, 4));
+		printf("%x, %#x", expr+i, paddr_read(expr+4, 4));
 	}
 	return 0;
 }
