@@ -130,8 +130,8 @@ static int cmd_x(char *args) {
 	int N;
 	int i;
 	word_t expr;
-	sscanf(args, "%d, %u", &N, &expr);
-	printf("%u\n", expr);
+	sscanf(args, "%d, %x", &N, &expr);
+	printf("%x\n", expr);
 	for (i  = 0; i < N; i++){
 		guest_to_host(expr+i);
 	}
