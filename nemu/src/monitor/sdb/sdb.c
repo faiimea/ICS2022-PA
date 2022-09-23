@@ -132,6 +132,7 @@ static int cmd_x(char *args) {
 		sscanf(arg, "%d", &N);
 	}
 	char *arg2 = strtok(NULL, " ");
+	printf("%s\n", arg2);
 	if (arg2 != NULL){
 		sscanf(arg2, "%u", &expr);
 	}
