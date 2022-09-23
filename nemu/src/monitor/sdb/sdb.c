@@ -128,10 +128,14 @@ static int cmd_x(char *args) {
 	char *arg = strtok(NULL, " ");
 	int N;
 	word_t expr;
-	if (arg != NULL) {
-		sscanf(args, "%d, %x", &N, &expr);
+	if (arg != NULL){
+		sscanf(arg, "%d", &N);
 	}
-	printf("%d, %#x\n", N, expr);
+	char *arg2 = strtok(NULL, " ");
+	if (arg2 != NULL){
+		sscanf(arg2, "%u", &expr);
+	}
+	printf("%x\n", expr);
 	return 0;
 }
 
@@ -145,7 +149,7 @@ void sdb_mainloop() {
     return;
   }
 
-  for (char *str; (str = rl_gets()) != NULL; ) {
+ 	for (char *str; (str = rl_gets()) != NULL; ) {
     char *str_end = str + strlen(str);
 
     /* extract the first token as the command */
