@@ -23,7 +23,7 @@
 enum {
   TK_NOTYPE = 256, TK_EQ,
 	
-	NUM = 0, HEX_NUM = 1,
+	NUM = 129, HEX_NUM = 1,
 
 	TK_PLUS = '+', TK_MINUS = '-',
 	TK_TIMES = '*', TK_DIVIDE = '/',
