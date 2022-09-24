@@ -106,7 +106,7 @@ static bool make_token(char *e) {
          * to record the token in the array `tokens'. For certain types
          * of tokens, some extra actions should be performed.
          */
-
+				printf("%d\n", rules[i].token_type);
         switch (rules[i].token_type) {
 					case '+': case '-': case '*': case '/':
 						tokens[nr_token++].type = rules[i].token_type;break;
@@ -134,7 +134,7 @@ word_t expr(char *e, bool *success) {
     *success = false;
     return 0;
   }
-
+	
   /* TODO: Insert codes to evaluate the expression. */
   TODO();
 
