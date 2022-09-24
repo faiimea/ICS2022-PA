@@ -25,10 +25,10 @@ enum {
 	
 	TK_DECIMAL_INTEGER = 0,
 
-	TK_PLUS = 1, TK_MINUS = 2,
-	TK_TIMES = 3, TK_DIVIDE = 4,
+	TK_PLUS = '+', TK_MINUS = '-',
+	TK_TIMES = '*', TK_DIVIDE = '/',
 	
-	TK_LEFT_BRACKET = 5, TK_RIGHT_BRACKET = 6,
+	TK_LEFT_BRACKET = '(', TK_RIGHT_BRACKET = ')',
   /* TODO: Add more token types */
 };
 
@@ -51,7 +51,7 @@ static struct rule {
 	{"\\(", '('},					// left bracket
 	{"\\)", ')'},					// right bracket
 	
-	{"[1-9][0-9]*"},			// decimal integer
+	{"[1-9][0-9]*", TK_DECIMAL_INTEGER},			// decimal integer
 };
 
 #define NR_REGEX ARRLEN(rules)
@@ -108,7 +108,11 @@ static bool make_token(char *e) {
          */
 
         switch (rules[i].token_type) {
-          default: printf("%d\n", rules[i].token_type);
+					case '+': case '-': case '*': case '/':
+						tokens[nr_token++].type = rules[i].token_type;break;
+					case TK_DECIMAL_INTEGER:
+						tokens[nr_token].type = rules[i].token_type; strncmp(tokens[nr_token++].str, substr_start, substr_len);break;
+          default: TODO();
         }
 
         break;

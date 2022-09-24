@@ -62,7 +62,7 @@ static int cmd_info(char *args);
 
 static int cmd_x(char *args);
 
-//static int cmd_p(char *args);
+static int cmd_p(char *args);
 
 static struct {
   const char *name;
@@ -77,7 +77,7 @@ static struct {
   { "si", "Execute N instructions", cmd_si},
   { "info", "Print the state of rigister and information of monitor", cmd_info},
 	{ "x", "Caculate the value of the expression as the start memory address.", cmd_x},
-	//{ "p", "Caculate the value of the expression.", cmd_p},
+	{ "p", "Caculate the value of the expression.", cmd_p},
 
 };
 
@@ -144,11 +144,12 @@ static int cmd_x(char *args) {
 	}
 	return 0;
 }
-/*
+
 static int cmd_p(char *args) {
 	char *arg = strtok(NULL, " ");
-	
-}*/
+	printf("%s\n", arg);
+	return 0;
+}
 
 void sdb_set_batch_mode() {
   is_batch_mode = true;
