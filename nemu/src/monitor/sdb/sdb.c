@@ -134,9 +134,9 @@ static int cmd_x(char *args) {
 	arg = strtok(NULL, " ");
 	sscanf(arg, "%x", &expr);
 	word_t addr = expr;
-	printf("%#8x ", expr);
+	printf("%#08x ", expr);
 	for (i = 0; i < N; i++) {
-		printf("%#8x ", paddr_read(addr, 4));
+		printf("%#08x ", paddr_read(addr, 4));
 		addr += 4;
 	}
 	return 0;
