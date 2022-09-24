@@ -23,7 +23,7 @@
 enum {
   TK_NOTYPE = 256, TK_EQ,
 	
-	TK_DECIMAL_INTEGER = 0,
+	NUM = 0, HEX_NUM = 1,
 
 	TK_PLUS = '+', TK_MINUS = '-',
 	TK_TIMES = '*', TK_DIVIDE = '/',
@@ -51,7 +51,7 @@ static struct rule {
 	{"\\(", '('},					// left bracket
 	{"\\)", ')'},					// right bracket
 	
-	{"[1-9][0-9]*", TK_DECIMAL_INTEGER},			// decimal integer
+	{"[1-9][0-9]*", NUM},			// decimal integer
 };
 
 #define NR_REGEX ARRLEN(rules)
@@ -106,15 +106,13 @@ static bool make_token(char *e) {
          * to record the token in the array `tokens'. For certain types
          * of tokens, some extra actions should be performed.
          */
-				printf("%d\n", rules[i].token_type);
         switch (rules[i].token_type) {
 					case '+': case '-': case '*': case '/':
 						tokens[nr_token++].type = rules[i].token_type;break;
-					case TK_DECIMAL_INTEGER:
+					case NUM:
 						tokens[nr_token].type = rules[i].token_type; strncmp(tokens[nr_token++].str, substr_start, substr_len);break;
           default: TODO();
         }
-
         break;
       }
     }
@@ -124,7 +122,9 @@ static bool make_token(char *e) {
       return false;
     }
   }
-
+	for (i = 0; i < nr_token; i++){
+		printf("%d, %s\n", tokens[i].type, tokens[i].str);
+	}
   return true;
 }
 
