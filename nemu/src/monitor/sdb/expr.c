@@ -21,14 +21,18 @@
 #include <regex.h>
 
 enum {
-  TK_NOTYPE = 256, TK_EQ,
+  TK_NOTYPE = 256, TK_EQ = 133,
 	
-	NUM = 129, HEX_NUM = 1,
+	NUM = 129, HEXNUM = 130,
+	REGISTER = 131, 
 
-	TK_PLUS = '+', TK_MINUS = '-',
-	TK_TIMES = '*', TK_DIVIDE = '/',
+	AND = '&', TK_NOTEQ = 132,
+	OR = '|', NOT = '!',
 	
-	TK_LEFT_BRACKET = '(', TK_RIGHT_BRACKET = ')',
+	PLUS = '+', MINUS = '-',
+	TIMES = '*', DIVIDE = '/',
+	LEFT_BRACKET = '(', RIGHT_BRACKET = ')', 
+
   /* TODO: Add more token types */
 };
 
@@ -44,6 +48,7 @@ static struct rule {
   {" +", TK_NOTYPE},    // spaces
   {"\\+", '+'},         // plus
   {"==", TK_EQ},        // equal
+	{"!=", TK_NOTEQ},		  // not equal
 	{"\\-", '-'},					// minus
 	{"\\*", '*'},					// times
 	{"\\/", '/'},					// divide
@@ -52,6 +57,12 @@ static struct rule {
 	{"\\)", ')'},					// right bracket
 	
 	{"[1-9][0-9]*", NUM},			// decimal integer
+	{"0x[0-9]*", HEXNUM}, // HEX integer
+	{"$[a-z][0-9]", REGISTER}, // register
+
+	{"&&", AND},					// and
+	{"\\|\\|", OR},				// or
+	{"!", '!'},						// not
 };
 
 #define NR_REGEX ARRLEN(rules)
@@ -82,6 +93,9 @@ typedef struct token {
 
 static Token tokens[32] __attribute__((used)) = {};
 static int nr_token __attribute__((used))  = 0;
+static bool check_parentheses(int p, int q)__attribute__((unused));
+static int find_op(int p, int q)__attribute__((unused));
+int eval(int p, int q)__attribute((unused));
 
 static bool make_token(char *e) {
   int position = 0;
@@ -111,7 +125,7 @@ static bool make_token(char *e) {
 						tokens[nr_token++].type = rules[i].token_type;break;
 					case NUM:
 						tokens[nr_token].type = rules[i].token_type; strncpy(tokens[nr_token++].str, substr_start, substr_len);break;
-          //default: TODO();
+          //default: ;
         }
         break;
       }
@@ -128,15 +142,98 @@ static bool make_token(char *e) {
   return true;
 }
 
-
-word_t expr(char *e, bool *success) {
+int expr(char *e, bool *success) {
   if (!make_token(e)) {
     *success = false;
     return 0;
   }
 	
   /* TODO: Insert codes to evaluate the expression. */
-  //TODO();
-
+	eval(0, nr_token-1);
   return 0;
+}
+
+int eval(int p, int q) {
+	if (p > q) {
+		/* Bad expression */
+		assert(0);
+	}
+	else if (p == q) {
+		switch (tokens[p].type) {
+			case NUM: case HEXNUM: return atoi(tokens[p].str);
+			case REGISTER: return atoi(tokens[p].str);
+		}
+		/* Single token.
+		 * For now this token should be a number.
+		 * Return the value of the number.
+		 */
+	}
+	else if (check_parentheses(p, q) == true) {
+		/* The expression is surrounded by a matched pair of parentheses.
+		* If that is the case, just throw away the parentheses.
+		*/
+			return eval(p + 1, q - 1);
+	}
+	else {
+		int op;
+		op = find_op(p, q);
+		if (op == -1) assert(0);
+		int val1 = eval(p, op - 1);
+		int val2 = eval(op + 1, q);
+		
+		switch (tokens[op].type) {
+			case '+': return val1 + val2;
+			case '-': return val1 - val2;
+			case '*': return val1 * val2;
+			case '/': return val1 / val2;
+			default: assert(0);
+		}
+	}
+	return 0;
+}
+
+
+static int find_op(int p, int q){
+	int i;
+	for (i = q; i >= p; i--) {
+		if (tokens[i].type == '(' || tokens[i].type == ')' || tokens[i].type == NUM || tokens[i].type == HEXNUM || tokens[i].type == REGISTER) continue;
+		if (tokens[i].type == OR) {
+			return i;
+		}
+		if (tokens[i].type == AND) {
+			return i;
+		}
+		if (tokens[i].type == TK_EQ || tokens[i].type == TK_NOTEQ) {
+			return i;
+		}
+		if (tokens[i].type == '+' || tokens[i].type == '-') {
+			return i;
+		}
+		if (tokens[i].type == '*' || tokens[i].type == '/') {
+			return i;
+		}
+	}
+	return -1;
+}
+
+static bool check_parentheses(int p, int q){
+		int i;
+		int cnt = 0;
+		if (tokens[p].type != '(' || tokens[q].type != ')')
+			return false;
+		for (i = p; i <= q; i++) {
+			if (tokens[i].type == '(') {
+				cnt++;
+			}
+			if (tokens[i].type == ')') {
+				cnt--;
+			}
+			if (cnt == 0 && i < q) {
+				return false;
+			}
+		}
+		if (cnt != 0) {
+			return false;
+		}
+		return true;
 }
