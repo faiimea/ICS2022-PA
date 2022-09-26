@@ -145,7 +145,6 @@ static bool make_token(char *e) {
 int expr(char *e, bool *success) {
   if (!make_token(e)) {
     *success = false;
-		printf("here/n");
     return 0;
   }
 	
@@ -155,6 +154,7 @@ int expr(char *e, bool *success) {
 }
 
 int eval(int p, int q) {
+	printf("%d, %d\n", p, q);
 	if (p > q) {
 		/* Bad expression */
 		assert(0);
