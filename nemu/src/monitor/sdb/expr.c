@@ -145,6 +145,7 @@ static bool make_token(char *e) {
 int expr(char *e, bool *success) {
   if (!make_token(e)) {
     *success = false;
+		printf("here/n");
     return 0;
   }
 	
