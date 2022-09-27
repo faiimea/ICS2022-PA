@@ -125,20 +125,18 @@ static bool make_token(char *e) {
 						tokens[nr_token++].type = rules[i].token_type;break;
 					case NUM:
 						tokens[nr_token].type = rules[i].token_type; strncpy(tokens[nr_token++].str, substr_start, substr_len);break;
-          default: position += 1;
+          default: break;
         }
         break;
       }
     }
-		//printf("%c\n", e[position]);
+
     if (i == NR_REGEX) {
       printf("no match at position %d\n%s\n%*.s^\n", position, e, position, "");
       return false;
     }
   }
-	/*for (i = 0; i < nr_token; i++){
-		printf("%d, %s\n", tokens[i].type, tokens[i].str);
-	}*/
+	
   return true;
 }
 
