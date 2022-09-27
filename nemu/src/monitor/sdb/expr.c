@@ -190,19 +190,30 @@ int eval(int p, int q) {
 	return 0;
 }
 
+static int priority(int sign) {
+	switch (sign) {
+		case '+': case '-': return 1;
+		case '*': case '/': return 2;
+	}
+	return 0;
+}
+
 
 static int find_op(int p, int q){
 	int i;
+	int op = p;
+	int cnt = 0;
+
 	for (i = q; i >= p; i--) {
-		if (tokens[i].type == '(' || tokens[i].type == ')' || tokens[i].type == NUM || tokens[i].type == HEXNUM || tokens[i].type == REGISTER) continue;
-		if (tokens[i].type == '+' || tokens[i].type == '-') {
-			return i;
-		}
-		if (tokens[i].type == '*' || tokens[i].type == '/') {
-			return i;
+		if (tokens[i].type == NUM || tokens[i].type == HEXNUM || tokens[i].type == REGISTER) continue;
+		if (tokens[i].type == '(') cnt++;
+		if (tokens[i].type == ')') cnt--;
+		
+		if (priority(tokens[i].type) < priority(tokens[op].type) && cnt == 0){
+			op = i;
 		}
 	}
-	return -1;
+	return op;
 }
 
 static bool check_parentheses(int p, int q){

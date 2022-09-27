@@ -131,8 +131,7 @@ static int cmd_info(char *args) {
 
 static int cmd_x(char *args) {
 	char *arg = strtok(NULL, " ");
-	int N;
-	int i;
+	int N, i;
 	word_t expr;
 	sscanf(arg, "%d", &N);
 	arg = strtok(NULL, " ");
@@ -148,7 +147,7 @@ static int cmd_x(char *args) {
 
 static int cmd_p(char *args) {
 	//char *arg = strtok(NULL, " ");
-	printf("%s\n", args);
+	//printf("%s\n", args);
 	bool flag=true;
 	bool *x=&flag;
 	expr(args, x);
