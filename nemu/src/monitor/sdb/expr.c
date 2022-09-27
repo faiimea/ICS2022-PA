@@ -206,6 +206,7 @@ static int find_op(int p, int q){
 	int cnt = 0;
 
 	for (i = p; i >= q; i++) {
+		printf("%d\n", tokens[i].type);
 		if (tokens[i].type == NUM || tokens[i].type == HEXNUM || tokens[i].type == REGISTER) continue;
 		if (tokens[i].type == '(') cnt++;
 		if (tokens[i].type == ')') cnt--;
