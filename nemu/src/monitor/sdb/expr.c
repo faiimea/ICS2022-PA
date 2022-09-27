@@ -176,9 +176,10 @@ word_t eval(int p, int q) {
 	else if (p == q) {
 		bool flag=false;
 		bool *success = &flag;
+		int res;
 		switch (tokens[p].type) {
 			case NUM: return atoi(tokens[p].str);
-			case HEXNUM: return atoi(tokens[p].str);
+			case HEXNUM: sscanf(tokens[p].str, "%x", &res);return res;
 			case REGISTER: return isa_reg_str2val(tokens[p].str, success);
 		}
 		/* Single token.
