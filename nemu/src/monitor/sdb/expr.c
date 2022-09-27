@@ -152,7 +152,6 @@ int expr(char *e, bool *success) {
 }
 
 int eval(int p, int q) {
-	printf("%d,%d\n", p, q);
 	if (p > q) {
 		/* Bad expression */
 		assert(0);
@@ -179,7 +178,7 @@ int eval(int p, int q) {
 		if (op == -1) assert(0);
 		int val1 = eval(p, op - 1);
 		int val2 = eval(op + 1, q);
-		printf("val1=%d val2=%d\n", val1, val2);
+		//printf("val1=%d val2=%d\n", val1, val2);
 		switch (tokens[op].type) {
 			case '+': return val1 + val2;
 			case '-': return val1 - val2;
