@@ -56,7 +56,7 @@ static struct rule {
 	{"\\(", '('},					// left bracket
 	{"\\)", ')'},					// right bracket
 	
-	{"[1-9][0-9]*", NUM},			// decimal integer
+	{"[0-9]+", NUM},			// decimal integer
 	{"0x[0-9]*", HEXNUM}, // HEX integer
 	{"$[a-z][0-9]", REGISTER}, // register
 
