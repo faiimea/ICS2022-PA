@@ -24,7 +24,7 @@ enum {
   TK_NOTYPE = 256, TK_EQ = 133,
 	
 	NUM = 129, HEXNUM = 130,
-	REGISTER = 131, 
+	REGISTER = 131, NEG = 132,
 
 	AND = '&', TK_NOTEQ = 132,
 	OR = '|', NOT = '!',
@@ -136,6 +136,11 @@ static bool make_token(char *e) {
       return false;
     }
   }
+	for (i = 0; i < nr_token; i++) {
+		if (tokens[i].type == '-' && (i == 0 || (tokens[i-1].type != ')' && tokens[i-1].type != NUM))) {
+				tokens[i].type = NEG;
+		}
+	}
 	
   return true;
 }
@@ -177,6 +182,9 @@ int eval(int p, int q) {
 		op = find_op(p, q);
 		//printf("op=%d\n", op);
 		if (op == -1) assert(0);
+		if (tokens[op].type == NEG) {
+			return eval(op + 1, q) * (-1);
+		}
 		int val1 = eval(p, op - 1);
 		int val2 = eval(op + 1, q);
 		//printf("val1=%d val2=%d\n", val1, val2);
