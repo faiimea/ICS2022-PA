@@ -196,7 +196,7 @@ static int priority(int sign) {
 		case '+': case '-': return 1;
 		case '*': case '/': return 2;
 	}
-	return 0;
+	return 100;
 }
 
 
@@ -210,13 +210,11 @@ static int find_op(int p, int q){
 		if (tokens[i].type == NUM || tokens[i].type == HEXNUM || tokens[i].type == REGISTER) continue;
 		if (tokens[i].type == '(') {
 			cnt++;
-			continue;
 		}
-		if (tokens[i].type == ')') {
+		else if (tokens[i].type == ')') {
 			cnt--;
-			continue;
 		}
-		if (priority(tokens[i].type) <= priority(tokens[op].type) && cnt == 0){
+		else if (priority(tokens[i].type) <= priority(tokens[op].type) && cnt == 0) {
 			printf("%d\n", i);
 			op = i;
 		}
