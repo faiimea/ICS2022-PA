@@ -154,6 +154,7 @@ int expr(char *e, bool *success) {
 }
 
 int eval(int p, int q) {
+	printf("%d,%d\n", p, q);
 	if (p > q) {
 		/* Bad expression */
 		assert(0);
