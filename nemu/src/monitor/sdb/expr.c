@@ -175,7 +175,7 @@ int eval(int p, int q) {
 	else {
 		int op;
 		op = find_op(p, q);
-		printf("op%d\n", op);
+		printf("op=%d\n", op);
 		if (op == -1) assert(0);
 		int val1 = eval(p, op - 1);
 		int val2 = eval(op + 1, q);
@@ -205,7 +205,7 @@ static int find_op(int p, int q){
 	int op = p;
 	int cnt = 0;
 
-	for (i = q; i >= p; i--) {
+	for (i = p; i >= q; i++) {
 		if (tokens[i].type == NUM || tokens[i].type == HEXNUM || tokens[i].type == REGISTER) continue;
 		if (tokens[i].type == '(') cnt++;
 		if (tokens[i].type == ')') cnt--;
