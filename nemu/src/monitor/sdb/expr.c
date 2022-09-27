@@ -208,9 +208,14 @@ static int find_op(int p, int q){
 	for (i = p; i <= q; i++) {
 		printf("%d.type =%d\n", i, tokens[i].type);
 		if (tokens[i].type == NUM || tokens[i].type == HEXNUM || tokens[i].type == REGISTER) continue;
-		if (tokens[i].type == '(') cnt++;
-		if (tokens[i].type == ')') cnt--;
-		
+		if (tokens[i].type == '(') {
+			cnt++;
+			continue;
+		}
+		if (tokens[i].type == ')') {
+			cnt--;
+			continue;
+		}
 		if (priority(tokens[i].type) <= priority(tokens[op].type) && cnt == 0){
 			op = i;
 		}
