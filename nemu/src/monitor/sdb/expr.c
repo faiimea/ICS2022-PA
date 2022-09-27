@@ -116,6 +116,7 @@ static bool make_token(char *e) {
 
         position += substr_len;
 				while (e[position] == ' '){
+					printf("%c\n", e[position]);
 					position++;
 				}
         /* TODO: Now a new token is recognized with rules[i]. Add codes
