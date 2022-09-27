@@ -98,7 +98,7 @@ static Token tokens[32] __attribute__((used)) = {};
 static int nr_token __attribute__((used))  = 0;
 static bool check_parentheses(int p, int q)__attribute__((unused));
 static int find_op(int p, int q)__attribute__((unused));
-int eval(int p, int q)__attribute((unused));
+word_t eval(int p, int q)__attribute((unused));
 
 static bool make_token(char *e) {
   int position = 0;
@@ -154,7 +154,7 @@ static bool make_token(char *e) {
   return true;
 }
 
-int expr(char *e, bool *success) {
+word_t expr(char *e, bool *success) {
   if (!make_token(e)) {
     *success = false;
     return 0;
@@ -165,7 +165,7 @@ int expr(char *e, bool *success) {
   return 0;
 }
 
-int eval(int p, int q) {
+word_t eval(int p, int q) {
 	if (p > q) {
 		/* Bad expression */
 		assert(0);
@@ -205,8 +205,8 @@ int eval(int p, int q) {
 			return !eval(op+1, q);
 		}
 
-		int val1 = eval(p, op - 1);
-		int val2 = eval(op + 1, q);
+		word_t val1 = eval(p, op - 1);
+		word_t val2 = eval(op + 1, q);
 		//printf("val1=%d val2=%d\n", val1, val2);
 		switch (tokens[op].type) {
 			case '+': return val1 + val2;
