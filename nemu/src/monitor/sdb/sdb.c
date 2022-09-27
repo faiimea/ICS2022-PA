@@ -147,11 +147,11 @@ static int cmd_x(char *args) {
 }
 
 static int cmd_p(char *args) {
-	char *arg = strtok(NULL, " ");
-	printf("%s\n", arg);
+	//char *arg = strtok(NULL, " ");
+	printf("%s\n", args);
 	bool flag=true;
 	bool *x=&flag;
-	expr(arg, x);
+	expr(args, x);
 	return 0;
 }
 
