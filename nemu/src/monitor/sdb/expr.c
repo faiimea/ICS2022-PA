@@ -182,11 +182,14 @@ int eval(int p, int q) {
 		op = find_op(p, q);
 		//printf("op=%d\n", op);
 		if (op == -1) assert(0);
-		if (tokens[op].type == NEG) {
+		/*if (tokens[op].type == NEG) {
 			return eval(op + 1, q) * (-1);
-		}
+		}*/
 		int val1 = eval(p, op - 1);
 		int val2 = eval(op + 1, q);
+		if (tokens[op].type == NEG) {
+			val2 *= -1;
+		}
 		//printf("val1=%d val2=%d\n", val1, val2);
 		switch (tokens[op].type) {
 			case '+': return val1 + val2;
