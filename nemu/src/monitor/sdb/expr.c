@@ -127,8 +127,10 @@ static bool make_token(char *e) {
         switch (rules[i].token_type) {
 					case '+': case '-': case '*': case '/': case '(': case ')':
 						tokens[nr_token++].type = rules[i].token_type;break;
-					case NUM: case HEXNUM:
+					case NUM:
 						tokens[nr_token].type = rules[i].token_type; strncpy(tokens[nr_token++].str, substr_start, substr_len);break;
+					case HEXNUM:
+						tokens[nr_token].type = rules[i].token_type; strncpy(tokens[nr_token++].str, substr_start+2, substr_len-2);break;
 					case REGISTER:
 						tokens[nr_token].type = rules[i].token_type; strncpy(tokens[nr_token++].str, substr_start+1, substr_len-1);break;
           default: break;
@@ -175,7 +177,8 @@ word_t eval(int p, int q) {
 		bool flag=false;
 		bool *success = &flag;
 		switch (tokens[p].type) {
-			case NUM: case HEXNUM: return atoi(tokens[p].str);
+			case NUM: return atoi(tokens[p].str);
+			case HEXNUM: return atoi(tokens[p].str);
 			case REGISTER: return isa_reg_str2val(tokens[p].str, success);
 		}
 		/* Single token.
