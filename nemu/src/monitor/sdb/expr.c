@@ -210,7 +210,7 @@ static int find_op(int p, int q){
 		if (tokens[i].type == '(') cnt++;
 		if (tokens[i].type == ')') cnt--;
 		
-		if (priority(tokens[i].type) < priority(tokens[op].type) && cnt == 0){
+		if (priority(tokens[i].type) <= priority(tokens[op].type) && cnt == 0){
 			op = i;
 		}
 	}
