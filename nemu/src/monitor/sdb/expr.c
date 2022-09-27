@@ -116,20 +116,19 @@ static bool make_token(char *e) {
 
         position += substr_len;
 				while (e[position] == ' '){
-					printf("%c\n", e[position]);
-					position++;
+					printf("%d ", position);
 				}
         /* TODO: Now a new token is recognized with rules[i]. Add codes
          * to record the token in the array `tokens'. For certain types
          * of tokens, some extra actions should be performed.
          */
-				printf("type=%d\n",rules[i].token_type);
+
         switch (rules[i].token_type) {
 					case '+': case '-': case '*': case '/': case '(': case ')':
 						tokens[nr_token++].type = rules[i].token_type;break;
 					case NUM:
 						tokens[nr_token].type = rules[i].token_type; strncpy(tokens[nr_token++].str, substr_start, substr_len);break;
-          default: break;
+          default: TODO();
         }
         break;
       }
