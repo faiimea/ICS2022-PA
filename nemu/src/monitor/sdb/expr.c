@@ -215,7 +215,7 @@ static int find_op(int p, int q){
 			cnt--;
 		}
 		else if (priority(tokens[i].type) <= priority(tokens[op].type) && cnt == 0) {
-			printf("%d\n", i);
+			//printf("%d\n", i);
 			op = i;
 		}
 	}
