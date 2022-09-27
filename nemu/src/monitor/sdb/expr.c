@@ -59,8 +59,9 @@ static struct rule {
 	{"\\(", '('},					// left bracket
 	{"\\)", ')'},					// right bracket
 	
-	{"[0-9]+", NUM},			// decimal integer
 	{"0[x,X][0-9,a-f]+", HEXNUM}, // HEX integer
+	{"[0-9]+", NUM},			// decimal integer
+	//{"0[x,X][0-9,a-f]+", HEXNUM}, // HEX integer
 	{"\\$[a-z, 0-9]+", REGISTER}, // register
 
 	{"&&", AND},					// and
