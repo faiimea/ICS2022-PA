@@ -148,7 +148,7 @@ static int cmd_x(char *args) {
 
 static int cmd_p(char *args) {
 	char *arg = strtok(NULL, " ");
-	//printf("%s\n", arg);
+	printf("%s\n", arg);
 	bool flag=true;
 	bool *x=&flag;
 	expr(arg, x);
