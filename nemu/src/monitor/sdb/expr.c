@@ -128,7 +128,7 @@ static bool make_token(char *e) {
 						tokens[nr_token].type = rules[i].token_type; strncpy(tokens[nr_token++].str, substr_start, substr_len);break;
           default: continue;
         }
-        break;
+        //break;
       }
     }
 
