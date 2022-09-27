@@ -125,7 +125,7 @@ static bool make_token(char *e) {
 						tokens[nr_token++].type = rules[i].token_type;break;
 					case NUM:
 						tokens[nr_token].type = rules[i].token_type; strncpy(tokens[nr_token++].str, substr_start, substr_len);break;
-          //default: ;
+          default: continue;
         }
         break;
       }
@@ -198,15 +198,6 @@ static int find_op(int p, int q){
 	int i;
 	for (i = q; i >= p; i--) {
 		if (tokens[i].type == '(' || tokens[i].type == ')' || tokens[i].type == NUM || tokens[i].type == HEXNUM || tokens[i].type == REGISTER) continue;
-		if (tokens[i].type == OR) {
-			return i;
-		}
-		if (tokens[i].type == AND) {
-			return i;
-		}
-		if (tokens[i].type == TK_EQ || tokens[i].type == TK_NOTEQ) {
-			return i;
-		}
 		if (tokens[i].type == '+' || tokens[i].type == '-') {
 			return i;
 		}
