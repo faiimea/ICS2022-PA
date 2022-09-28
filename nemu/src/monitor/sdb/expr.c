@@ -21,14 +21,17 @@
 #include <regex.h>
 #include <memory/paddr.h>
 enum {
-  TK_NOTYPE = 256, TK_EQ = 133,
+  TK_NOTYPE = 256, TK_EQ = 255,
 	
-	NUM = 129, HEXNUM = 130,
-	REGISTER = 131, NEG = 132,
-	DEREF = 134,
+	NUM = 254, HEXNUM = 253,
+	REGISTER = 252, NEG = 251,
+	DEREF = 250,
 
-	AND = '&', TK_NOTEQ = 132,
-	OR = '|', NOT = '!',
+	AND = 249, TK_NOTEQ = 248,
+	OR = 247, NOT = '!',
+	LE = 246, BE = 245,
+	LESS = 244, BIGGER = 243,
+	LM = 242, RM = 241,
 	
 	PLUS = '+', MINUS = '-',
 	TIMES = '*', DIVIDE = '/',
@@ -53,7 +56,7 @@ static struct rule {
   {"==", TK_EQ},        // equal
 	{"!=", TK_NOTEQ},		  // not equal
 	{"\\-", '-'},					// minus
-	{"\\*", '*'},					// times
+	{"\\*1", '*'},				// times
 	{"\\/", '/'},					// divide
 
 	{"\\(", '('},					// left bracket
@@ -61,12 +64,17 @@ static struct rule {
 	
 	{"0[x,X][0-9,a-f]+", HEXNUM}, // HEX integer
 	{"[0-9]+", NUM},			// decimal integer
-	//{"0[x,X][0-9,a-f]+", HEXNUM}, // HEX integer
 	{"\\$[a-z, 0-9]+", REGISTER}, // register
 
 	{"&&", AND},					// and
 	{"\\|\\|", OR},				// or
 	{"!", '!'},						// not
+	{"<=", LE},						// less equal
+	{">=", BE},						// bigger equal
+	{"<", LESS},					// less
+	{">", BIGGER},				// bigger
+	{"<<", LM},						// left move
+	{">>", RM},						// right move
 };
 
 #define NR_REGEX ARRLEN(rules)
@@ -124,16 +132,17 @@ static bool make_token(char *e) {
          * to record the token in the array `tokens'. For certain types
          * of tokens, some extra actions should be performed.
          */
+				tokens[nr_token].type = rules[i].token_type;
         switch (rules[i].token_type) {
 					case '+': case '-': case '*': case '/': case '(': case ')':
-						tokens[nr_token++].type = rules[i].token_type;break;
+						nr_token++;break;
 					case NUM:
-						tokens[nr_token].type = rules[i].token_type; strncpy(tokens[nr_token++].str, substr_start, substr_len);break;
+						strncpy(tokens[nr_token++].str, substr_start, substr_len);break;
 					case HEXNUM:
-						tokens[nr_token].type = rules[i].token_type; strncpy(tokens[nr_token++].str, substr_start+2, substr_len-2);break;
+						strncpy(tokens[nr_token++].str, substr_start+2, substr_len-2);break;
 					case REGISTER:
-						tokens[nr_token].type = rules[i].token_type; strncpy(tokens[nr_token++].str, substr_start+1, substr_len-1);break;
-          default: break;
+						strncpy(tokens[nr_token++].str, substr_start+1, substr_len-1);break;
+          default: nr_token++; break;
         }
         break;
       }
@@ -222,6 +231,12 @@ word_t eval(int p, int q) {
 			case OR: return val1 || val2;
 			case TK_EQ: return val1 == val2;
 			case TK_NOTEQ: return val1 != val2;
+			case LM: return (val1 << val2);
+			case RM: return (val1 >> val2);
+			case LESS: return val1 < val2;
+			case BIGGER: return val1 > val2;
+			case LE: return val1 <= val2;
+			case BE: return val1 >= val2;
 			default: assert(0);
 		}
 	}
@@ -230,9 +245,14 @@ word_t eval(int p, int q) {
 
 static int priority(int sign) {
 	switch (sign) {
-		case NEG: case DEREF: return 1;
-		case '+': case '-': return 2;
-		case '*': case '/': return 3;
+		case NEG: case DEREF: return 8;
+		case '+': case '-': return 6;
+		case '*': case '/': return 7;
+		case TK_NOTEQ: case TK_EQ: return 3;
+		case AND: return 2;
+		case OR: return 1;
+		case LE: case BE: case LESS: case BIGGER: return 4;
+		case LM: case RM: return 5;
 	}
 	return 100;
 }

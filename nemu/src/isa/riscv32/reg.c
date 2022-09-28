@@ -36,7 +36,7 @@ word_t isa_reg_str2val(const char *s, bool *success) {
 		if (strcmp(s, regs[i]) == 0) {
 			*success = true;
 			//printf("%#x", cpu.pc+i);
-			return cpu.pc+i;
+			return cpu.gpr[i];
 		}
 	}
 	return 0;
