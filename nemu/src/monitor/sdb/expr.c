@@ -56,7 +56,7 @@ static struct rule {
   {"==", TK_EQ},        // equal
 	{"!=", TK_NOTEQ},		  // not equal
 	{"\\-", '-'},					// minus
-	{"\\*1", '*'},				// times
+	{"\\*", '*'},				// times
 	{"\\/", '/'},					// divide
 
 	{"\\(", '('},					// left bracket
