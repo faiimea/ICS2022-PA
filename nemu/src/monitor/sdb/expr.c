@@ -36,9 +36,6 @@ enum {
 	PLUS = '+', MINUS = '-',
 	TIMES = '*', DIVIDE = '/',
 	LEFT_BRACKET = '(', RIGHT_BRACKET = ')', 
-	
-	
-
   /* TODO: Add more token types */
 };
 
