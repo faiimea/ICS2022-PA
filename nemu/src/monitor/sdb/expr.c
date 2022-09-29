@@ -259,7 +259,7 @@ static int priority(int sign) {
 
 static int find_op(int p, int q){
 	int i;
-	int op = p;
+	int op = -1;
 	int cnt = 0;
 
 	for (i = p; i <= q; i++) {
