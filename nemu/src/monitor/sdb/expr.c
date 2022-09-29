@@ -140,7 +140,7 @@ static bool make_token(char *e) {
 						strncpy(tokens[nr_token++].str, substr_start+2, substr_len-2);break;
 					case REGISTER:
 						strncpy(tokens[nr_token++].str, substr_start+1, substr_len-1);break;
-          default: nr_token++; break;
+          default: nr_token++;break;
         }
         break;
       }
