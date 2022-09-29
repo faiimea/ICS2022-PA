@@ -235,7 +235,7 @@ word_t eval(int p, int q) {
 			case BIGGER: return val1 > val2;
 			case LE: return val1 <= val2;
 			case BE: return val1 >= val2;
-			default: assert(0);
+			//default: assert(0);
 		}
 	}
 	return 0;
