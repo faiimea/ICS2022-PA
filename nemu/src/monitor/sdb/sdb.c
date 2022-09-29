@@ -65,6 +65,8 @@ static int cmd_x(char *args);
 
 static int cmd_p(char *args);
 
+static int cmd_w(char *args);
+
 static struct {
   const char *name;
   const char *description;
@@ -79,7 +81,7 @@ static struct {
   { "info", "Print the state of rigister and information of monitor", cmd_info},
 	{ "x", "Caculate the value of the expression as the start memory address.", cmd_x},
 	{ "p", "Caculate the value of the expression.", cmd_p},
-
+	{ "w", "Set a watchpoint", cmd_w},
 };
 
 #define NR_CMD ARRLEN(cmd_table)
@@ -149,8 +151,14 @@ static int cmd_p(char *args) {
 	//char *arg = strtok(NULL, " ");
 	//printf("%s\n", args);
 	bool flag=true;
-	bool *x=&flag;
-	expr(args, x);
+	expr(args, &flag);
+	return 0;
+}
+
+static int cmd_w(char *args) {
+	WP *wp=new_wp(args);
+	//printf("%d\n", wp->NO);
+	Log("Successfully build a watchpoint %s", wp->expr);
 	return 0;
 }
 

@@ -16,15 +16,16 @@
 #include "sdb.h"
 
 #define NR_WP 32
-
+/*
 typedef struct watchpoint {
   int NO;
   struct watchpoint *next;
 
-  /* TODO: Add more members if necessary */
-	char expr[32];
+  * TODO: Add more members if necessary */
+/*	
+char expr[32];
 	word_t value;
-} WP;
+} WP;*/
 
 static WP wp_pool[NR_WP] = {};
 static WP *head = NULL, *free_ = NULL;
@@ -96,4 +97,18 @@ void free_wp(WP *wp){
 	}
 }
 
-
+bool is_changed() {
+	bool success = false;
+	WP *wp = head;
+	while (wp != NULL) {
+		word_t value = expr(wp->expr, &success);
+		if (value == wp->value) {
+			return false;
+		}
+		else {
+			return true;
+		}
+		wp = wp->next;
+	}
+	return false;
+}
