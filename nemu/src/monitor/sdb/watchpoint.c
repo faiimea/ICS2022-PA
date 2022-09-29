@@ -126,7 +126,6 @@ void delete_wp(int NO) {
 
 void print_wp(){
 	WP *wp = head;
-	printf("sa\n");
 	if (wp == NULL) {
 		printf("There`s no watchpoint.\n");
 	}
