@@ -170,12 +170,11 @@ word_t expr(char *e, bool *success) {
   }
 	
   /* TODO: Insert codes to evaluate the expression. */
-	printf("%d\n", eval(0, nr_token-1));
+	printf("%x\n", eval(0, nr_token-1));
   return 0;
 }
 
 word_t eval(int p, int q) {
-	printf("%d, %d\n", p, q);
 	if (p > q) {
 		/* Bad expression */
 		//assert(0);
