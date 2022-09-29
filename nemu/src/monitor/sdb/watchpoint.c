@@ -111,3 +111,15 @@ bool is_changed() {
 	}
 	return false;
 }
+
+void delete_wp(int NO) {
+	WP *wp = head;
+	if (head != NULL) {
+		while(wp != NULL) {
+			if (NO == wp->NO) {
+				printf("Successfully delete watchpoint %d, %s", NO, wp->expr);
+				return;
+			}
+		}
+	}
+}

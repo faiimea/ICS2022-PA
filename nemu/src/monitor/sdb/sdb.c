@@ -66,6 +66,8 @@ static int cmd_p(char *args);
 
 static int cmd_w(char *args);
 
+static int cmd_d(char *args);
+
 static struct {
   const char *name;
   const char *description;
@@ -81,6 +83,7 @@ static struct {
 	{ "x", "Caculate the value of the expression as the start memory address.", cmd_x},
 	{ "p", "Caculate the value of the expression.", cmd_p},
 	{ "w", "Set a watchpoint", cmd_w},
+	{ "d", "Delete a watchpoint", cmd_d},
 };
 
 #define NR_CMD ARRLEN(cmd_table)
@@ -158,6 +161,16 @@ static int cmd_w(char *args) {
 	WP *wp=new_wp(args);
 	//printf("%d\n", wp->NO);
 	Log("Successfully build a watchpoint %d, %s", wp->NO, wp->expr);
+	return 0;
+}
+
+static int cmd_d(char *args) {
+	char *arg = strtok(NULL, " ");
+	if (arg != NULL) {
+		int NO;
+		sscanf(arg, "%d", &NO);
+		delete_wp(NO);
+	}
 	return 0;
 }
 
