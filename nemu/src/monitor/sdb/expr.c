@@ -177,7 +177,8 @@ word_t expr(char *e, bool *success) {
 word_t eval(int p, int q) {
 	if (p > q) {
 		/* Bad expression */
-		assert(0);
+		//assert(0);
+		return -1;
 	}
 	else if (p == q) {
 		bool flag=false;
