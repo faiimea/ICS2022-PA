@@ -129,6 +129,7 @@ static bool make_token(char *e) {
          * to record the token in the array `tokens'. For certain types
          * of tokens, some extra actions should be performed.
          */
+				printf("type=%d\n",rules[i].token_type);
 				if (rules[i].token_type == TK_EQ) break;
 				tokens[nr_token].type = rules[i].token_type;
         switch (rules[i].token_type) {
