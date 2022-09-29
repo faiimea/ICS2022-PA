@@ -205,7 +205,7 @@ word_t eval(int p, int q) {
 	else {
 		int op;
 		op = find_op(p, q);
-		printf("op=%d\n", op);
+		//printf("op=%d\n", op);
 		if (op == -1) assert(0);
 		
 		//some special operators
@@ -222,7 +222,7 @@ word_t eval(int p, int q) {
 		word_t val1 = eval(p, op - 1);
 		word_t val2 = eval(op + 1, q);
 
-		printf("val1=%x val2=%x\n", val1, val2);
+		//printf("val1=%x val2=%x\n", val1, val2);
 		switch (tokens[op].type) {
 			case '+': return val1 + val2;
 			case '-': return val1 - val2;
