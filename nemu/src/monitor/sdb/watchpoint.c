@@ -20,10 +20,9 @@
 typedef struct watchpoint {
   int NO;
   struct watchpoint *next;
-
-  * TODO: Add more members if necessary */
-/*	
-char expr[32];
+*/
+ 	/* TODO: Add more members if necessary */
+	/*char expr[32];
 	word_t value;
 } WP;*/
 

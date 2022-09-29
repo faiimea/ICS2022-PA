@@ -49,7 +49,6 @@ static int cmd_c(char *args) {
   return 0;
 }
 
-
 static int cmd_q(char *args) {
 	nemu_state.state = NEMU_QUIT;
   return -1;
@@ -158,7 +157,7 @@ static int cmd_p(char *args) {
 static int cmd_w(char *args) {
 	WP *wp=new_wp(args);
 	//printf("%d\n", wp->NO);
-	Log("Successfully build a watchpoint %s", wp->expr);
+	Log("Successfully build a watchpoint %d, %s", wp->NO, wp->expr);
 	return 0;
 }
 
