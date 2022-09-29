@@ -79,7 +79,7 @@ static struct {
 
   /* TODO: Add more commands */
   { "si", "Execute N instructions", cmd_si},
-  { "info", "Print the state of rigister and information of monitor", cmd_info},
+  { "info", "Print the state of rigisters and information of watchpoints", cmd_info},
 	{ "x", "Caculate the value of the expression as the start memory address.", cmd_x},
 	{ "p", "Caculate the value of the expression.", cmd_p},
 	{ "w", "Set a watchpoint", cmd_w},
@@ -129,6 +129,9 @@ static int cmd_info(char *args) {
   char *arg = strtok(NULL, " ");
 	if (strcmp(arg, "r") == 0) {
 		isa_reg_display();
+	}
+	else if (strcmp(arg, "w")) {
+		print_wp();
 	}
   return 0;
 }

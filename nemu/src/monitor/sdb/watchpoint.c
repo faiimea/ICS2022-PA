@@ -123,3 +123,16 @@ void delete_wp(int NO) {
 		}
 	}
 }
+
+void print_wp(){
+	WP *wp = head;
+	if (head == NULL) {
+		printf("There`s no watchpoint.\n");
+	}
+	else {
+		while (wp != NULL) {
+			printf("%d, %s\n", wp->NO, wp->expr);
+			wp = wp->next;
+		}
+	}
+}

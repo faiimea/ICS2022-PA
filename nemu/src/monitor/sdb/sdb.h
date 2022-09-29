@@ -29,4 +29,5 @@ WP* new_wp(char *exp);
 void free_wp(WP *wp);
 bool is_changed();
 void delete_wp(int NO);
+void print_wp();
 #endif
