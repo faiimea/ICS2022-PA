@@ -187,7 +187,7 @@ word_t eval(int p, int q) {
 		bool *success = &flag;
 		int res;
 		switch (tokens[p].type) {
-			case NUM: return atoi(tokens[p].str);
+			case NUM: sscanf(tokens[p].str, "%d", &res);return res;
 			case HEXNUM: sscanf(tokens[p].str, "%x", &res);return res;
 			case REGISTER: return isa_reg_str2val(tokens[p].str, success);
 		}
