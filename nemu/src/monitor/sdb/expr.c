@@ -162,10 +162,9 @@ static bool make_token(char *e) {
 			tokens[i].type = DEREF;
 		}
 	}
-	/*for (i = 0; i < nr_token; i++) {
-		if (tokens[i].type == NUM)
-			printf("num=%s\n", tokens[i].str);
-	}*/
+	for (i = 0; i < nr_token; i++) {
+		printf("type=%d ", tokens[i].type);
+	}
   return true;
 }
 
