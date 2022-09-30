@@ -164,7 +164,7 @@ static bool make_token(char *e) {
 	}
 	for (i = 0; i < nr_token; i++) {
 		if (tokens[i].type == NUM)
-			printf("%s ", tokens[i].str);
+			printf("num=%s ", tokens[i].str);
 	}
   return true;
 }
