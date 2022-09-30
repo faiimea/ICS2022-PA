@@ -114,7 +114,7 @@ static bool make_token(char *e) {
   nr_token = 0;
 	memset(tokens, 0, sizeof(Token)*32);
   while (e[position] != '\0') {
-		printf("e=%s\n", e);
+		//printf("e=%s\n", e);
     /* Try all rules one by one. */
     for (i = 0; i < NR_REGEX; i ++) {
       if (regexec(&re[i], e + position, 1, &pmatch, 0) == 0 && pmatch.rm_so == 0) {
@@ -162,10 +162,10 @@ static bool make_token(char *e) {
 			tokens[i].type = DEREF;
 		}
 	}
-	for (i = 0; i < nr_token; i++) {
+	/*for (i = 0; i < nr_token; i++) {
 		if (tokens[i].type == NUM)
 			printf("num=%s\n", tokens[i].str);
-	}
+	}*/
   return true;
 }
 
