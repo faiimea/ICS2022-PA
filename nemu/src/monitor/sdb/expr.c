@@ -139,8 +139,10 @@ static bool make_token(char *e) {
 					case HEXNUM:
 						strncpy(tokens[nr_token++].str, substr_start+2, substr_len);break;
 					case REGISTER:
-						printf("tail=%s\n", substr_start);
-						strncpy(tokens[nr_token++].str, substr_start+1, substr_len-1);break;
+						//printf("tail=%s\n", substr_start);
+						strncpy(tokens[nr_token++].str, substr_start+1, substr_len-1);
+						printf("expr=%s\n", tokens[nr_token-1].str);
+						break;
           default: nr_token++;break;
         }
         break;
