@@ -137,7 +137,7 @@ static bool make_token(char *e) {
 					case NUM:
 						strncpy(tokens[nr_token++].str, substr_start, substr_len);break;
 					case HEXNUM:
-						strncpy(tokens[nr_token++].str, substr_start+2, substr_len-2);break;
+						strncpy(tokens[nr_token++].str, substr_start+2, substr_len-2);printf("%s\n", tokens[nr_token-1].str);break;
 					case REGISTER:
 						strncpy(tokens[nr_token++].str, substr_start+1, substr_len-1);break;
           default: nr_token++;break;
