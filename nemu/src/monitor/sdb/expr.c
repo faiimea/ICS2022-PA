@@ -112,7 +112,7 @@ static bool make_token(char *e) {
   regmatch_t pmatch;
 
   nr_token = 0;
-
+	memset(tokens, 0, sizeof(Token)*32);
   while (e[position] != '\0') {
 		printf("e=%s\n", e);
     /* Try all rules one by one. */
