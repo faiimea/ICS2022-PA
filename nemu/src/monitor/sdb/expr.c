@@ -179,8 +179,8 @@ word_t expr(char *e, bool *success) {
 word_t eval(int p, int q) {
 	if (p > q) {
 		/* Bad expression */
-		//assert(0);
-		return -1;
+		assert(0);
+		//return -1;
 	}
 	else if (p == q) {
 		bool flag=false;
@@ -222,7 +222,7 @@ word_t eval(int p, int q) {
 		word_t val1 = eval(p, op - 1);
 		word_t val2 = eval(op + 1, q);
 
-		//printf("val1=%x val2=%x\n", val1, val2);
+		printf("val1=%x val2=%x\n", val1, val2);
 		switch (tokens[op].type) {
 			case '+': return val1 + val2;
 			case '-': return val1 - val2;
@@ -238,7 +238,7 @@ word_t eval(int p, int q) {
 			case BIGGER: return val1 > val2;
 			case LE: return val1 <= val2;
 			case BE: return val1 >= val2;
-			//default: assert(0);
+			default: assert(0);
 		}
 	}
 	return 0;
