@@ -154,11 +154,11 @@ static bool make_token(char *e) {
     }
   }
 	for (i = 0; i < nr_token; i++) {
-		if (tokens[i].type == '-' && (i == 0 || (tokens[i-1].type != ')' && tokens[i-1].type != NUM))) {
+		if (tokens[i].type == '-' && (i == 0 || (tokens[i-1].type != ')' && tokens[i-1].type != NUM && tokens[i-1].type != HEXNUM && tokens[i-1].type != REGISTER))) {
 			tokens[i].type = NEG;
 		}
 
-		if (tokens[i].type == '*' && (i == 0 || (tokens[i-1].type != ')' && tokens[i-1].type != NUM))) {
+		if (tokens[i].type == '*' && (i == 0 || (tokens[i-1].type != ')' && tokens[i-1].type != NUM && tokens[i-1].type != HEXNUM && tokens[i-1].type != REGISTER))) {
 			tokens[i].type = DEREF;
 		}
 	}
