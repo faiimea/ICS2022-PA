@@ -209,7 +209,7 @@ word_t eval(int p, int q) {
 	else {
 		int op;
 		op = find_op(p, q);
-		//printf("op=%d\n", op);
+		printf("op=%d\n", op);
 		if (op == -1) assert(0);
 		
 		//some special operators
