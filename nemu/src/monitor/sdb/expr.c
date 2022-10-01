@@ -100,7 +100,7 @@ typedef struct token {
   char str[32];
 } Token;
 
-static Token tokens[32] __attribute__((used)) = {};
+static Token tokens[64] __attribute__((used)) = {};
 static int nr_token __attribute__((used))  = 0;
 static bool check_parentheses(int p, int q)__attribute__((unused));
 static int find_op(int p, int q)__attribute__((unused));
@@ -112,7 +112,7 @@ static bool make_token(char *e) {
   regmatch_t pmatch;
 
   nr_token = 0;
-	memset(tokens, 0, sizeof(Token)*32);
+	memset(tokens, 0, sizeof(Token)*64);
   while (e[position] != '\0') {
 		//printf("e=%s\n", e);
     /* Try all rules one by one. */
