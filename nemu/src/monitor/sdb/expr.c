@@ -61,7 +61,7 @@ static struct rule {
 	
 	{"0[x,X][0-9,a-f]+", HEXNUM}, // HEX integer
 	{"[0-9]+", NUM},			// decimal integer
-	{"\\$[a-z, 0-9]+", REGISTER}, // register
+	{"\\$[a-z,0-9]+", REGISTER}, // register
 
 	{"&&", AND},					// and
 	{"\\|\\|", OR},				// or
