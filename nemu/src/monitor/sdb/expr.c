@@ -189,12 +189,11 @@ word_t eval(int p, int q) {
 	}
 	else if (p == q) {
 		bool flag=false;
-		bool *success = &flag;
 		int res;
 		switch (tokens[p].type) {
 			case NUM: return atoi(tokens[p].str);
 			case HEXNUM: sscanf(tokens[p].str, "%x", &res);return res;
-			case REGISTER: return isa_reg_str2val(tokens[p].str, success);
+			case REGISTER: return isa_reg_str2val(tokens[p].str, &flag);
 		}
 		/* Single token.
 		 * For now this token should be a number.
@@ -215,6 +214,7 @@ word_t eval(int p, int q) {
 		
 		//some special operators
 		if (tokens[op].type == NEG) {
+			assert(0);
 			return eval(op + 1, q) * (-1);
 		}
 		if (tokens[op].type == DEREF) {
@@ -260,7 +260,7 @@ static int priority(int sign) {
 		case LE: case BE: case LESS: case BIGGER: return 4;
 		case LM: case RM: return 5;
 	}
-	return 100;
+	return 20;
 }
 
 
