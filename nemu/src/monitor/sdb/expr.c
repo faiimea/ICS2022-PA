@@ -207,7 +207,6 @@ word_t eval(int p, int q) {
 			return eval(p + 1, q - 1);
 	}
 	else {
-		assert(0);
 		int op;
 		op = find_op(p, q);
 		//printf("op=%d\n", op);
