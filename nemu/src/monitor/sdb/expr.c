@@ -188,12 +188,12 @@ word_t eval(int p, int q) {
 		//return -1;
 	}
 	else if (p == q) {
-		//bool flag=false;
+		bool flag=false;
 		int res;
 		switch (tokens[p].type) {
 			case NUM: return atoi(tokens[p].str);
 			case HEXNUM: sscanf(tokens[p].str, "%x", &res);return res;
-			//case REGISTER: return isa_reg_str2val(tokens[p].str, &flag);
+			case REGISTER: return isa_reg_str2val(tokens[p].str, &flag);
 		}
 		/* Single token.
 		 * For now this token should be a number.
