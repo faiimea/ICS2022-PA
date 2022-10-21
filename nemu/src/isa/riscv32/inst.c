@@ -21,7 +21,7 @@
 #define R(i) gpr(i)
 #define Mr vaddr_read
 #define Mw vaddr_write
-#define Jal R(dest) = s->dnpc; s->dnpc += imm;
+#define Jal R(dest) = s->pc+4; s->dnpc += imm;
 
 enum {
   TYPE_I, TYPE_U, TYPE_S,
