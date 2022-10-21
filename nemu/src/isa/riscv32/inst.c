@@ -21,7 +21,7 @@
 #define R(i) gpr(i)
 #define Mr vaddr_read
 #define Mw vaddr_write
-#define Jal R(dest) = s->snpc; s->dnpc += imm;
+#define Jal R(dest) = s->dnpc; s->dnpc += imm;
 
 enum {
   TYPE_I, TYPE_U, TYPE_S,
@@ -33,7 +33,7 @@ enum {
 #define immI() do { *imm = SEXT(BITS(i, 31, 20), 12); } while(0)
 #define immU() do { *imm = SEXT(BITS(i, 31, 12), 20) << 12; } while(0)
 #define immS() do { *imm = (SEXT(BITS(i, 31, 25), 7) << 5) | BITS(i, 11, 7); } while(0)
-#define immJ() do { *imm = SEXT(BITS(i, 31, 12), 20); } while(0)
+#define immJ() do { *imm = SEXT(BITS(i, 31, 12), 20) << 1; } while(0)
 
 static void decode_operand(Decode *s, int *dest, word_t *src1, word_t *src2, word_t *imm, int type) {
   uint32_t i = s->isa.inst.val;
