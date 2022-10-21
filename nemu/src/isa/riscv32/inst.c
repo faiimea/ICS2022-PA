@@ -21,7 +21,7 @@
 #define R(i) gpr(i)
 #define Mr vaddr_read
 #define Mw vaddr_write
-#define Jump R(dest) = s->pc + 4; s->pc += imm;
+#define Jump s->pc += imm;
 
 enum {
   TYPE_I, TYPE_U, TYPE_S,
