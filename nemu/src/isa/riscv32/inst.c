@@ -24,7 +24,7 @@
 
 enum {
   TYPE_I, TYPE_U, TYPE_S,
-  TYPE_N, TYPE_J, TYPE_B// none
+  TYPE_N, TYPE_J, TYPE_B, TYPE_R, // none
 };
 
 #define src1R() do { *src1 = R(rs1); } while (0)
@@ -34,6 +34,7 @@ enum {
 #define immS() do { *imm = (SEXT(BITS(i, 31, 25), 7) << 5) | BITS(i, 11, 7); } while(0)
 #define immJ() do { *imm = (SEXT(BITS(i, 31, 31), 1) << 20) | (BITS(i, 19, 12) << 12) | (BITS(i, 20, 20) << 11) | (BITS(i, 30, 21) << 1) | 0; } while(0)
 #define immB() do { *imm = (SEXT(BITS(i, 31, 31) ,1) << 12) | (BITS(i, 30, 25) << 5) | (BITS(i ,11, 8) << 1) | (BITS(i, 7, 7) << 11); } while(0)
+
 static void decode_operand(Decode *s, int *dest, word_t *src1, word_t *src2, word_t *imm, int type) {
   uint32_t i = s->isa.inst.val;
   int rd  = BITS(i, 11, 7);
@@ -46,6 +47,7 @@ static void decode_operand(Decode *s, int *dest, word_t *src1, word_t *src2, wor
     case TYPE_S: src1R(); src2R(); immS(); break;
 		case TYPE_J: 									 immJ(); break;
 		case TYPE_B: src1R(); src2R(); immB(); break;
+		case TYPE_R: src1R(); src2R(); 				 break;
   }
 }
 
@@ -71,6 +73,7 @@ static int decode_exec(Decode *s) {
 	INSTPAT("??????? ????? ????? 101 ????? 11000 11", bge    , B, if (src1 >= src2) s->dnpc = s->pc + imm);
   INSTPAT("??????? ????? ????? 001 ????? 11000 11", bne    , B, if (src1 != src2) s->dnpc = s->pc + imm);
 	INSTPAT("??????? ????? ????? 000 ????? 11000 11", beq    , B, if (src1 == src2) s->dnpc = s->pc + imm);
+	INSTPAT("0100000 ????? ????? 000 ????? 01100 11", sub    , R, R(dest) = src1 - src2);
 	INSTPAT("??????? ????? ????? ??? ????? ????? ??", inv    , N, INV(s->pc));
   INSTPAT_END();
 
