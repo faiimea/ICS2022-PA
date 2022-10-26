@@ -21,7 +21,6 @@ include $(NEMU_HOME)/tools/difftest.mk
 compile_git:
 	$(call git_commit, "compile NEMU")
 $(BINARY): compile_git
-$(c): q
 
 # Some convenient rules
 
@@ -32,7 +31,7 @@ override ARGS += $(ARGS_DIFF)
 IMG ?=
 NEMU_EXEC := $(BINARY) $(ARGS) $(IMG)
 
-run-env: $(BINARY) $(DIFF_REF_SO) $(c)
+run-env: $(BINARY) $(DIFF_REF_SO)
 
 run: run-env
 	$(call git_commit, "run NEMU")
@@ -41,6 +40,12 @@ run: run-env
 gdb: run-env
 	$(call git_commit, "gdb NEMU")
 	gdb -s $(BINARY) --args $(NEMU_EXEC)
+
+count: 
+	@echo "nemu总行数: \c"
+	@find -name *.[ch] | xargs cat | wc -l
+	@echo "非空白行数: \c"
+	@find -name *.[ch] | xargs cat | grep -v "^$$" | wc -l
 
 clean-tools = $(dir $(shell find ./tools -maxdepth 2 -mindepth 2 -name "Makefile"))
 $(clean-tools):
