@@ -43,6 +43,7 @@ char *strcat(char *dst, const char *src) {
 }
 
 int strcmp(const char *s1, const char *s2) {
+	assert(0);
 	int flag = 0;
 	while(*s2) {
 		flag = *s1 - *s2;
