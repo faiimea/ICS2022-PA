@@ -7,7 +7,7 @@
 size_t strlen(const char *s) {
 	size_t len = 0;
 	char *t = (char*) s;
-	while ((*t)++ != '\0') {
+	while (*t++ != '\0') {
 		len += 1;
 	}
   //panic("Not implemented");
@@ -43,7 +43,7 @@ char *strcat(char *dst, const char *src) {
 }
 
 int strcmp(const char *s1, const char *s2) {
-	int flag = 1;
+	int flag = 0;
 	while(*s2) {
 		flag = *s1 - *s2;
 		if(flag) {
@@ -57,7 +57,7 @@ int strcmp(const char *s1, const char *s2) {
 }
 
 int strncmp(const char *s1, const char *s2, size_t n) {
-	int flag = 1;
+	int flag = 0;
 	while(n-- && *s2) {
 		flag = *s1 - *s2;
 		if (flag) {
