@@ -51,7 +51,7 @@ int strcmp(const char *s1, const char *s2) {
 			break;
 		}
 	if (strlen(s1) != strlen(s2)) flag = 0;
-	printf("%d\n", flag);
+	//printf("%d\n", flag);
 	return flag;
   //panic("Not implemented");
 }
