@@ -21,9 +21,5 @@ image:
 run: image
 	$(IMAGE)
 
-count: 
-	@echo "行数: \c"
-	@find -name *.[ch] xargs cat | wc -l
-
 gdb: image
 	gdb -ex "handle SIGUSR1 SIGUSR2 SIGSEGV noprint nostop" $(IMAGE)
