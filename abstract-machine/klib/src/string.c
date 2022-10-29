@@ -43,14 +43,15 @@ char *strcat(char *dst, const char *src) {
 }
 
 int strcmp(const char *s1, const char *s2) {
-	bool flag = 1;
+	int flag = 1;
 	size_t i;
 	for (i = 0; s1[i] != '\0' && s2[i] != '\0'; i++)
 		if (s1[i] != s2[i]) {
 			flag = 0;
 			break;
 		}
-	if (strlen(s1) != strlen(s2)) flag = false;
+	if (strlen(s1) != strlen(s2)) flag = 0;
+	printf("%d\n", flag);
 	return flag;
   //panic("Not implemented");
 }
