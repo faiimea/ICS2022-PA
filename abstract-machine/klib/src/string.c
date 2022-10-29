@@ -44,6 +44,7 @@ char *strcat(char *dst, const char *src) {
 
 int strcmp(const char *s1, const char *s2) {
 	int flag = 1;
+	printf("%s\n", *s1);
 	while(*s2) {
 		flag = *s1 - *s2;
 		if(!flag) {
