@@ -36,7 +36,7 @@ char *strncpy(char *dst, const char *src, size_t n) {
 char *strcat(char *dst, const char *src) {
   size_t i = 0;
 	size_t len = strlen(dst);
-	for (i = 0; i < len && src[i] != '\0'; i++)
+	for (i = 0; src[i] != '\0'; i++)
 		dst[len+i] = src[i];
 	dst[len+i] = '\0';
 	return dst;
