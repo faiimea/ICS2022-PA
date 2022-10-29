@@ -94,7 +94,7 @@ void *memmove(void *dst, const void *src, size_t n) {
 			*p-- = *q--;
 		}
 	}
-	return p;
+	return dst;
 	//panic("Not implemented");
 }
 
@@ -104,7 +104,7 @@ void *memcpy(void *out, const void *in, size_t n) {
 	while (n--) {
 		*p++ = *q++;
 	}
-	return p;
+	return out;
   //panic("Not implemented");
 }
 
