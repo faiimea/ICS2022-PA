@@ -44,8 +44,7 @@ char *strcat(char *dst, const char *src) {
 }
 
 int strcmp(const char *s1, const char *s2) {
-	int flag = 0;
-	printf("000");
+	/*int flag = 0;
 	while(*s2) {
 		flag = *s1 - *s2;
 		if(flag) {
@@ -54,8 +53,8 @@ int strcmp(const char *s1, const char *s2) {
 		++s1;
 		++s2;
 	}
-	return flag;
-  //panic("Not implemented");
+	return flag;*/
+  panic("Not implemented");
 }
 
 int strncmp(const char *s1, const char *s2, size_t n) {
