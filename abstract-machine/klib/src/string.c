@@ -27,7 +27,8 @@ char *strncpy(char *dst, const char *src, size_t n) {
 	size_t i = 0;
 	for (i = 0; i < n && src[i] != '\0'; i++)
 		dst[i] = src[i];
-	dst[i] = '\0';
+	for (; i < n; i++)
+		dst[i] = '\0';
 	return dst;
   //panic("Not implemented");
 }
@@ -43,8 +44,8 @@ char *strcat(char *dst, const char *src) {
 }
 
 int strcmp(const char *s1, const char *s2) {
-	assert(0);
 	int flag = 0;
+	printf("000");
 	while(*s2) {
 		flag = *s1 - *s2;
 		if(flag) {
