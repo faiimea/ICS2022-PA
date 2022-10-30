@@ -24,9 +24,9 @@ static char* get_int(char *p, va_list *ap) {
 		d /= 10;
 	}
 	
-	/*for (int i = len-1; i >= 0; i--) {
+	for (int i = len-1; i >= 0; i--) {
 		*p++ = str[i];
-	}*/
+	}
 	return p;
 }
 
