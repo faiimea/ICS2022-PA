@@ -20,6 +20,7 @@ static char* get_int(char *p, va_list *ap) {
 	while (d) {
 		*str = d % 10 + '0';
 		len ++;
+		str++;
 		d /= 10;
 	}
 	//size_t len = strlen(str);
