@@ -7,7 +7,6 @@
 
 static char* get_int(char *p, va_list *ap) {
 	int d = va_arg(*ap, int);
-	int len = 0;
 	char* str = '\0';
 	if (d == 0) {
 		*p++ = '0';
@@ -20,10 +19,10 @@ static char* get_int(char *p, va_list *ap) {
 	while (d) {
 		*str = (char)(d % 10 + '0');
 		str++;
-		len++;
 		d /= 10;
 	}
-	for (int i = len-1; i >= 0; i--) {
+	int len = strlen(str);
+	for (int i = len-1; i > 0; i--) {
 		*p++ = str[i];
 	}
 	return p;
