@@ -4,33 +4,30 @@
 #include <stdarg.h>
 
 #if !defined(__ISA_NATIVE__) || defined(__NATIVE_USE_KLIB__)
-/*
-static char* get_int(va_list *ap) {
+
+static char* get_int(char *p, va_list *ap) {
 	int d = va_arg(*ap, int);
-	char* str= '\0';
+	char* str = '\0';
 	if (d == 0) {
-		*str = '0';
-		return str;
+		*p++ = '0';
+		return p;
 	}
 	if (d < 0) {
-		*str = '-';
-		str++;
+		*p++ = '-';
 		d *= -1;
 	}
-	char *t;
 	while (d) {
-		*t = (char)(d % 10 + '0');
-		t++;
+		*str = (char)(d % 10 + '0');
+		str++;
 		d /= 10;
 	}
-	while (t) {
-		*str = *t;
-		str++;
-		t--;
+	int len = strlen(str);
+	for (int i = len-1; i >= 0; i--) {
+		*p++ = str[i];
 	}
-	return str;
+	return p;
 }
-*/
+
 static char* get_string(char* p, va_list *ap) {
 	char *str = va_arg(*ap, char*);
 	while(*str) {
@@ -45,7 +42,7 @@ static int make_out(char *out, const char *fmt, va_list ap) {
 		if (*fmt == '%') {
 			fmt++;
 			switch (*fmt) {
-				//case 'd': strcat(out, get_int(&ap));break;
+				case 'd': p = get_int(p, &ap);break;
 				case 's': p = get_string(p, &ap);break;
 			}
 			fmt++;
