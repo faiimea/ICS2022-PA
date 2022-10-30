@@ -4,7 +4,7 @@
 #include <stdarg.h>
 
 #if !defined(__ISA_NATIVE__) || defined(__NATIVE_USE_KLIB__)
-
+/*
 static char* get_int(va_list *ap) {
 	int d = va_arg(*ap, int);
 	char* str= '\0';
@@ -30,21 +30,31 @@ static char* get_int(va_list *ap) {
 	}
 	return str;
 }
+*/
+static char* get_string(char* p, va_list *ap) {
+	char *str = va_arg(*ap, char*);
+	while(*str) {
+		*p++ = *str++;
+	}
+	return p;
+}
 
 static int make_out(char *out, const char *fmt, va_list ap) {
+	char* p = (char*)out;
 	while (*fmt) {
 		if (*fmt == '%') {
 			fmt++;
 			switch (*fmt) {
-				case 'd': strcat(out, get_int(&ap));break;
-				case 's': strcat(out, va_arg(ap, char*));break;
+				//case 'd': strcat(out, get_int(&ap));break;
+				case 's': p = get_string(p, &ap);break;
 			}
-		}
-		else {
 			fmt++;
 		}
+		else {
+			*p++ = *fmt++;
+		}
 	}
-	*out++ = '\0';
+	*p++ = '\0';
 	return 0;
 }
 
