@@ -41,11 +41,10 @@ static int make_out(char *out, const char *fmt, va_list ap) {
 	while (*fmt) {
 		if (*fmt == '%') {
 			fmt++;
-			switch (*fmt) {
+			switch (*fmt++) {
 				case 'd': p = get_int(p, &ap);break;
 				case 's': p = get_string(p, &ap);break;
 			}
-			fmt++;
 		}
 		else {
 			*p++ = *fmt++;
