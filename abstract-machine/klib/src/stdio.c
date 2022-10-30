@@ -24,9 +24,10 @@ static char* get_int(char *p, va_list *ap) {
 		d /= 10;
 	}
 	size_t len = strlen(str);
-	for (int i = len-1; i >= 0; i--) {
+	len+=1;
+	/*for (int i = len-1; i >= 0; i--) {
 		*p++ = str[i];
-	}
+	}*/
 	return p;
 }
 
