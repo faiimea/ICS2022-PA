@@ -23,8 +23,8 @@ static char* get_int(char *p, va_list *ap) {
 		str++;
 		d /= 10;
 	}
-	*str='\0';
 	assert(0);
+	*str='\0';
 	size_t len = strlen(str);
 	len += 1;
 	/*for (int i = len-1; i >= 0; i--) {
