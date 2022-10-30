@@ -19,11 +19,9 @@ static char* get_int(char *p, va_list *ap) {
 	}
 	while (d) {
 		*str = d % 10 + '0';
-		str++;
 		//len ++;
 		d /= 10;
 	}
-	str--;
 	size_t len = strlen(str);
 	len += 1;
 	/*for (int i = len-1; i >= 0; i--) {
