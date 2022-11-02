@@ -146,11 +146,6 @@ config ITRACE_COND
   string "Only trace instructions when the condition is true"
   default "true"
 
-config MTRACET
-	depends on TRACE
-	string "Enable memory tracer"
-	default y
-
 config DIFFTEST
   depends on TARGET_NATIVE_ELF
   bool "Enable differential testing"
