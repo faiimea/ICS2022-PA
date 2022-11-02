@@ -149,7 +149,7 @@ config ITRACE_COND
 config MTRACE
 	depends on TRACE
 	string "Enable memory tracer"
-	default y
+	default n
 
 config DIFFTEST
   depends on TARGET_NATIVE_ELF
