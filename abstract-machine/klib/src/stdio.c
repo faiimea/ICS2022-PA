@@ -7,7 +7,7 @@
 
 static char* get_int(char *p, va_list *ap) {
 	int d = va_arg(*ap, int);
-	char str[20];
+	char str[32];
 	int len = 0;
 	if (d == 0) {
 		*p++ = '0';
@@ -55,7 +55,13 @@ static int make_out(char *out, const char *fmt, va_list ap) {
 }
 
 int printf(const char *fmt, ...) {
-  panic("Not implemented");
+  va_list ap;
+	char p[128];
+	va_start(ap, fmt);
+	make_out(p, fmt, ap);
+	va_end(ap);
+	putstr(p);
+	return 0;
 }
 
 int vsprintf(char *out, const char *fmt, va_list ap) {
