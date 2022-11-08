@@ -69,7 +69,7 @@ int printf(const char *fmt, ...) {
 	va_start(ap, fmt);
 	make_out(p, fmt, ap);
 	va_end(ap);
-	putch(p[0]);
+	putstr(p);
 	return 0;
 }
 
