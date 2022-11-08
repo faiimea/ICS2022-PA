@@ -68,8 +68,8 @@ int printf(const char *fmt, ...) {
 	va_list ap;
 	va_start(ap, fmt);
 	make_out(p, fmt, ap);
-	putstr("jile here");
 	va_end(ap);
+	putstr("jile here\n");
 	putstr(p);
 	return 0;
 }
