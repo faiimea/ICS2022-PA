@@ -58,6 +58,7 @@ static int make_out(char *out, const char *fmt, va_list ap) {
 		}
 	}
 	*p++ = '\0';
+	putstr(p);
 	return 0;
 }
 
@@ -69,7 +70,7 @@ int printf(const char *fmt, ...) {
 	va_end(ap);
 	for (const char *c = p; *c; c++)
 		putch(*c);
-	putstr(p);
+	//putstr(p);
 	return 0;
 }
 
