@@ -67,8 +67,6 @@ int printf(const char *fmt, ...) {
 	va_start(ap, fmt);
 	make_out(out, fmt, ap);
 	va_end(ap);
-	for (const char *c = out; *c; c++)
-		putch(*c);
 	putstr(out);
 	return 0;
 }
