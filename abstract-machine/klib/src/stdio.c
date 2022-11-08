@@ -64,7 +64,7 @@ static int make_out(char *out, const char *fmt, va_list ap) {
 }
 
 int printf(const char *fmt, ...) {
-  char p[2048];
+  char p[1024];
 	va_list ap;
 	va_start(ap, fmt);
 	make_out(p, fmt, ap);
