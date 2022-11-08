@@ -69,7 +69,7 @@ int printf(const char *fmt, ...) {
 	va_end(ap);
 	for (const char *c = p; *c; c++)
 		putch(*c);
-	putstr("go fuck yourself!\n");
+	putstr(p);
 	return 0;
 }
 
