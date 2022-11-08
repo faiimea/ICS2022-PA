@@ -44,7 +44,6 @@ static char* get_char(char* p, va_list *ap) {
 static int make_out(char *out, const char *fmt, va_list ap) {
 	char* p = (char*)out;
 	while (*fmt) {
-		putch(*fmt);
 		if (*fmt == '%') {
 			fmt++;
 			switch (*fmt) {
@@ -63,12 +62,12 @@ static int make_out(char *out, const char *fmt, va_list ap) {
 }
 
 int printf(const char *fmt, ...) {
-  char p[2048];
+  char *p='\0';
 	va_list ap;
 	va_start(ap, fmt);
 	make_out(p, fmt, ap);
 	va_end(ap);
-	//putstr(p);
+	putstr(p);
 	return 0;
 }
 
