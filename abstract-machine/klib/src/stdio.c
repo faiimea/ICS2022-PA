@@ -59,7 +59,7 @@ static int make_out(char *out, const char *fmt, va_list ap) {
 		}
 	}
 	putstr(fmt);
-	*p++ = '\0';
+	//*p++ = '\0';
 	return 0;
 }
 
