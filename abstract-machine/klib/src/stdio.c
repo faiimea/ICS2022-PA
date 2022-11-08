@@ -58,18 +58,17 @@ static int make_out(char *out, const char *fmt, va_list ap) {
 			*p++ = *fmt++;
 		}
 	}
-	putstr(fmt);
-	//*p++ = '\0';
+	*p++ = '\0';
 	return 0;
 }
 
 int printf(const char *fmt, ...) {
-  char p[1024];
+  char p[2048];
 	va_list ap;
 	va_start(ap, fmt);
 	make_out(p, fmt, ap);
 	va_end(ap);
-	putstr(p);
+	//putstr(p);
 	return 0;
 }
 
