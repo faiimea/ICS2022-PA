@@ -35,6 +35,12 @@ static char* get_string(char* p, va_list *ap) {
 	return p;
 }
 
+static char* get_char(char* p, va_list *ap) {
+	char ch = (char)va_arg(*ap, int);
+	*p++ = ch;
+	return p;
+}
+
 static int make_out(char *out, const char *fmt, va_list ap) {
 	char* p = (char*)out;
 	while (*fmt) {
@@ -43,6 +49,7 @@ static int make_out(char *out, const char *fmt, va_list ap) {
 			switch (*fmt) {
 				case 'd': p = get_int(p, &ap);break;
 				case 's': p = get_string(p, &ap);break;
+				case 'c': p = get_char(p, &ap);break;
 			}
 			fmt++;
 		}
