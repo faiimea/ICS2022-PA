@@ -47,11 +47,12 @@ static int make_out(char *out, const char *fmt, va_list ap) {
 		putch(*fmt);
 		if (*fmt == '%') {
 			fmt++;
-			switch (*fmt++) {
+			switch (*fmt) {
 				case 'd': p = get_int(p, &ap);break;
 				case 's': p = get_string(p, &ap);break;
 				case 'c': p = get_char(p, &ap);break;
 			}
+			fmt++;
 		}
 		else {
 			*p++ = *fmt++;
@@ -67,6 +68,7 @@ int printf(const char *fmt, ...) {
 	va_list ap;
 	va_start(ap, fmt);
 	make_out(p, fmt, ap);
+	putstr("jile here");
 	va_end(ap);
 	putstr(p);
 	return 0;
