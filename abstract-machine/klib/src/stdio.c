@@ -63,6 +63,7 @@ static int make_out(char *out, const char *fmt, va_list ap) {
 
 int printf(const char *fmt, ...) {
   char p[2048];
+	putstr("jile here\n");
 	va_list ap;
 	va_start(ap, fmt);
 	make_out(p, fmt, ap);
