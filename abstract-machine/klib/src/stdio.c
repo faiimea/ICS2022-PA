@@ -69,8 +69,7 @@ int printf(const char *fmt, ...) {
 	va_start(ap, fmt);
 	make_out(p, fmt, ap);
 	va_end(ap);
-	putstr("jile here\n");
-	//putstr(p);
+	putch(p[0]);
 	return 0;
 }
 
