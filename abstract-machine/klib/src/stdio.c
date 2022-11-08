@@ -70,7 +70,7 @@ int printf(const char *fmt, ...) {
 	make_out(p, fmt, ap);
 	va_end(ap);
 	putstr("jile here\n");
-	putstr(p);
+	//putstr(p);
 	return 0;
 }
 
