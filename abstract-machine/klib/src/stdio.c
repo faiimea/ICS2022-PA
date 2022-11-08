@@ -58,19 +58,18 @@ static int make_out(char *out, const char *fmt, va_list ap) {
 		}
 	}
 	*p++ = '\0';
-	putstr(p);
 	return 0;
 }
 
 int printf(const char *fmt, ...) {
-  char p[2048];
+  char out[2048];
 	va_list ap;
 	va_start(ap, fmt);
-	make_out(p, fmt, ap);
+	make_out(out, fmt, ap);
 	va_end(ap);
-	for (const char *c = p; *c; c++)
+	for (const char *c = out; *c; c++)
 		putch(*c);
-	//putstr(p);
+	putstr(out);
 	return 0;
 }
 
