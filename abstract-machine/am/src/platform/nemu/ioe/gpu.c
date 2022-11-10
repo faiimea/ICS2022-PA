@@ -31,7 +31,6 @@ void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
 	int screen_width = io_read(AM_GPU_CONFIG).width;
 	uint32_t *fb = (uint32_t *)(uintptr_t)FB_ADDR;
 	uint32_t *pixels = (uint32_t *)ctl->pixels;
-	printf("%d %d %d %d %d\n", ctl->h, ctl->w, ctl->x, ctl->y, screen_width);
 	for (i = 0; i < ctl->h; i++)
 		for (j = 0; j < ctl->w; j++) {
 			outl((uintptr_t)(fb+(ctl->x+j)+(ctl->y+i)*screen_width), pixels[i*ctl->w+j]);
