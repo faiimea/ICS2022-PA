@@ -66,11 +66,11 @@ static void print_ringbuf() {
 #endif
 
 static void exec_once(Decode *s, vaddr_t pc) {
-  printf("pc=%#x\n", pc);
 	s->pc = pc;
   s->snpc = pc;
   isa_exec_once(s);
   cpu.pc = s->dnpc;
+	printf("%#x\n",cpu.pc);
 #ifdef CONFIG_ITRACE
   char *p = s->logbuf;
   p += snprintf(p, sizeof(s->logbuf), FMT_WORD ":", s->pc);
@@ -96,7 +96,6 @@ static void exec_once(Decode *s, vaddr_t pc) {
 static void execute(uint64_t n) {
   Decode s;
   for (;n > 0; n --) {
-		printf("cpu.pc=%#x\n",cpu.pc);
     exec_once(&s, cpu.pc);
     g_nr_guest_inst ++;
     trace_and_difftest(&s, cpu.pc);
