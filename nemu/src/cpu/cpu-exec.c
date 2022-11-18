@@ -47,6 +47,7 @@ static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
 	strncpy(ring_buffer[(RB_INDEX++)%RB_LINES], _this->logbuf, RB_LENGTH);
 #endif
   if (g_print_step) { IFDEF(CONFIG_ITRACE, puts(_this->logbuf)); }
+	printf("%#x, %#x", _this->pc, dnpc);
   IFDEF(CONFIG_DIFFTEST, difftest_step(_this->pc, dnpc));
 	
 	bool flag = is_changed();
@@ -96,7 +97,7 @@ static void execute(uint64_t n) {
   Decode s;
   for (;n > 0; n --) {
     exec_once(&s, cpu.pc);
-		printf("cpu.pc=%#x\n", cpu.pc);
+		//printf("cpu.pc=%#x\n", cpu.pc);
     g_nr_guest_inst ++;
     trace_and_difftest(&s, cpu.pc);
     if (nemu_state.state != NEMU_RUNNING) break;
