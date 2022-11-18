@@ -26,16 +26,25 @@
  */
 #define MAX_INST_TO_PRINT 10
 
+#ifdef CONFIG_ITRACE_COND
+#define RB_LINES 16
+#define RB_LENGTH 128
+char ring_buffer[RB_LINES][RB_LENGTH];
+int RB_INDEX = 0;
+#endif
+
 CPU_state cpu = {};
 uint64_t g_nr_guest_inst = 0;
 static uint64_t g_timer = 0; // unit: us
 static bool g_print_step = false;
+
 
 void device_update();
 
 static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
 #ifdef CONFIG_ITRACE_COND
   if (ITRACE_COND) { log_write("%s\n", _this->logbuf); }
+	strncpy(ring_buffer[(RB_INDEX++)%RB_LINES], _this->logbuf, RB_LENGTH);
 #endif
   if (g_print_step) { IFDEF(CONFIG_ITRACE, puts(_this->logbuf)); }
   IFDEF(CONFIG_DIFFTEST, difftest_step(_this->pc, dnpc));
@@ -47,8 +56,17 @@ static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
 	}
 }
 
+#ifdef CONFIG_ITRACE_COND
+static void print_ringbuf() {
+	printf(ANSI_FMT("Here are nearest %d lines instructions\n", ANSI_FG_RED), RB_LINES);
+	int i=RB_INDEX % RB_LINES;
+	for (; i < RB_INDEX; i++) 
+		printf(ANSI_FMT("%s\n", ANSI_FG_RED), ring_buffer[i%RB_LINES]);
+}
+#endif
+
 static void exec_once(Decode *s, vaddr_t pc) {
-  s->pc = pc;
+	s->pc = pc;
   s->snpc = pc;
   isa_exec_once(s);
   cpu.pc = s->dnpc;
@@ -119,7 +137,11 @@ void cpu_exec(uint64_t n) {
   switch (nemu_state.state) {
     case NEMU_RUNNING: nemu_state.state = NEMU_STOP; break;
 
-    case NEMU_END: case NEMU_ABORT:
+    case NEMU_ABORT:
+#ifdef CONFIG_ITRACE_COND
+		print_ringbuf();
+#endif
+		case NEMU_END:
       Log("nemu: %s at pc = " FMT_WORD,
           (nemu_state.state == NEMU_ABORT ? ANSI_FMT("ABORT", ANSI_FG_RED) :
            (nemu_state.halt_ret == 0 ? ANSI_FMT("HIT GOOD TRAP", ANSI_FG_GREEN) :

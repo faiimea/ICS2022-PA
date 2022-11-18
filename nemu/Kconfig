@@ -136,6 +136,16 @@ config TRACE_END
   int "When tracing is disabled (unit: number of instructions)"
   default 10000
 
+config MTRACE
+	depends on TRACE
+	bool "Enable memory tracer"
+	default y
+
+config DTRACE
+	depends on TRACE
+	bool "Enable device tracer"
+	default y
+
 config ITRACE
   depends on TRACE && TARGET_NATIVE_ELF && ENGINE_INTERPRETER
   bool "Enable instruction tracer"
@@ -145,7 +155,6 @@ config ITRACE_COND
   depends on ITRACE
   string "Only trace instructions when the condition is true"
   default "true"
-
 
 config DIFFTEST
   depends on TARGET_NATIVE_ELF

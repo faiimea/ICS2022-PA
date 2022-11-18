@@ -41,6 +41,12 @@ gdb: run-env
 	$(call git_commit, "gdb NEMU")
 	gdb -s $(BINARY) --args $(NEMU_EXEC)
 
+count: 
+	@echo "nemu总行数: \c"
+	@find -name *.[ch] | xargs cat | wc -l
+	@echo "非空白行数: \c"
+	@find -name *.[ch] | xargs cat | grep -v "^$$" | wc -l
+
 clean-tools = $(dir $(shell find ./tools -maxdepth 2 -mindepth 2 -name "Makefile"))
 $(clean-tools):
 	-@$(MAKE) -s -C $@ clean
