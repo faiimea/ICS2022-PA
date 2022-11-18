@@ -47,7 +47,7 @@ static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
 	strncpy(ring_buffer[(RB_INDEX++)%RB_LINES], _this->logbuf, RB_LENGTH);
 #endif
   if (g_print_step) { IFDEF(CONFIG_ITRACE, puts(_this->logbuf)); }
-	printf("%#x, %#x", _this->pc, dnpc);
+	printf("%#x, %#x\n", _this->pc, dnpc);
   IFDEF(CONFIG_DIFFTEST, difftest_step(_this->pc, dnpc));
 	
 	bool flag = is_changed();
